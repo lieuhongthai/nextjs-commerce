@@ -8,5 +8,6 @@ const dictionaries = {
   fr: () => import("../locales/fr.json").then((module) => module.default),
 };
 
+export type DictionariesType = typeof dictionaries;
 export const getDictionary = async (locale: Locale) =>
   dictionaries[locale]?.() ?? dictionaries.en();
