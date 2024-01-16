@@ -1,42 +1,42 @@
 // ** React Imports
-import { ElementType } from 'react';
+import { ElementType } from 'react'
 
 // ** Next Imports
-import Link from 'next/link';
+import Link from 'next/link'
 
 // ** MUI Imports
-import Chip from '@mui/material/Chip';
-import ListItem from '@mui/material/ListItem';
-import Typography from '@mui/material/Typography';
-import Box, { BoxProps } from '@mui/material/Box';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import { styled, useTheme } from '@mui/material/styles';
-import ListItemButton, { ListItemButtonProps } from '@mui/material/ListItemButton';
+import Chip from '@mui/material/Chip'
+import ListItem from '@mui/material/ListItem'
+import Typography from '@mui/material/Typography'
+import Box, { BoxProps } from '@mui/material/Box'
+import ListItemIcon from '@mui/material/ListItemIcon'
+import { styled, useTheme } from '@mui/material/styles'
+import ListItemButton, { ListItemButtonProps } from '@mui/material/ListItemButton'
 
 // ** Configs Import
-import themeConfig from 'src/configs/themeConfig';
+import themeConfig from '@/configs/themeConfig'
 
 // ** Types
-import { NavGroup, NavLink, Settings } from '@/@core/types/mui/type';
+import { NavGroup, NavLink, Settings } from '@/@core/types/mui/type'
 
 // ** Custom Components Imports
 
 // ** Util Import
-import UserIcon from '@/@core/layouts/components/UserIcon';
-import Translations from '@/@core/layouts/components/Translations';
-import { handleURLQueries } from '@/@core/layouts/utils';
-import { useRouter, useParams, usePathname } from 'next/navigation';
+import UserIcon from '@/@core/layouts/components/UserIcon'
+import Translations from '@/@core/layouts/components/Translations'
+import { handleURLQueries } from '@/@core/layouts/utils'
+import { useRouter, useParams, usePathname } from 'next/navigation'
 
 interface Props {
-  parent?: boolean;
-  item: NavLink;
-  navHover?: boolean;
-  settings: Settings;
-  navVisible?: boolean;
-  collapsedNavWidth: number;
-  navigationBorderWidth: number;
-  toggleNavVisibility: () => void;
-  isSubToSub?: NavGroup | undefined;
+  parent?: boolean
+  item: NavLink
+  navHover?: boolean
+  settings: Settings
+  navVisible?: boolean
+  collapsedNavWidth: number
+  navigationBorderWidth: number
+  toggleNavVisibility: () => void
+  isSubToSub?: NavGroup | undefined
 }
 
 // ** Styled Components
@@ -50,18 +50,18 @@ const MenuNavLink = styled(ListItemButton)<
     '&, &:hover': {
       backgroundColor: theme.palette.primary.light,
       '&.Mui-focusVisible': {
-        backgroundColor: theme.palette.primary.main,
-      },
+        backgroundColor: theme.palette.primary.main
+      }
     },
     '& .MuiTypography-root': {
       fontWeight: 500,
-      color: `${theme.palette.common.white} !important`,
+      color: `${theme.palette.common.white} !important`
     },
     '& .MuiListItemIcon-root': {
-      color: `${theme.palette.common.white} !important`,
-    },
-  },
-}));
+      color: `${theme.palette.common.white} !important`
+    }
+  }
+}))
 
 const MenuItemTextMetaWrapper = styled(Box)<BoxProps>({
   width: '100%',
@@ -69,8 +69,8 @@ const MenuItemTextMetaWrapper = styled(Box)<BoxProps>({
   alignItems: 'center',
   justifyContent: 'space-between',
   transition: 'opacity .25s ease-in-out',
-  ...(themeConfig.menuTextTruncate && { overflow: 'hidden' }),
-});
+  ...(themeConfig.menuTextTruncate && { overflow: 'hidden' })
+})
 
 const VerticalNavLink = ({
   item,
@@ -81,47 +81,47 @@ const VerticalNavLink = ({
   isSubToSub,
   collapsedNavWidth,
   toggleNavVisibility,
-  navigationBorderWidth,
+  navigationBorderWidth
 }: Props) => {
   // ** Hooks
-  const theme = useTheme();
-  const query = useParams();
-  const router = useRouter();
-  const pathname = usePathname();
+  const theme = useTheme()
+  const query = useParams()
+  const router = useRouter()
+  const pathname = usePathname()
 
   // ** Vars
-  const { mode, navCollapsed } = settings;
+  const { mode, navCollapsed } = settings
 
-  const icon = parent && !item.icon ? themeConfig.navSubItemIcon : item.icon;
+  const icon = parent && !item.icon ? themeConfig.navSubItemIcon : item.icon
 
   const conditionalIconColor = () => {
     if (mode === 'semi-dark') {
       return {
-        color: `rgba(${theme.palette.customColors.dark}, ${parent ? 0.6 : 0.87})`,
-      };
+        color: `rgba(${theme.palette.customColors.dark}, ${parent ? 0.6 : 0.87})`
+      }
     } else
       return {
-        color: parent ? 'text.secondary' : 'text.primary',
-      };
-  };
+        color: parent ? 'text.secondary' : 'text.primary'
+      }
+  }
 
   const conditionalBgColor = () => {
     if (mode === 'semi-dark') {
       return {
         '&:hover': {
-          backgroundColor: `rgba(${theme.palette.customColors.dark}, 0.05)`,
-        },
-      };
-    } else return {};
-  };
+          backgroundColor: `rgba(${theme.palette.customColors.dark}, 0.05)`
+        }
+      }
+    } else return {}
+  }
 
   const isNavLinkActive = () => {
     if (pathname === item.path || handleURLQueries(pathname, query, item.path)) {
-      return true;
+      return true
     } else {
-      return false;
+      return false
     }
-  };
+  }
 
   return (
     <>
@@ -132,7 +132,7 @@ const VerticalNavLink = ({
         sx={{
           mt: 1.5,
           transition: 'padding .25s ease-in-out',
-          px: parent ? '0 !important' : `${theme.spacing(navCollapsed && !navHover ? 2 : 3)} !important`,
+          px: parent ? '0 !important' : `${theme.spacing(navCollapsed && !navHover ? 2 : 3)} !important`
         }}
       >
         <MenuNavLink
@@ -143,11 +143,11 @@ const VerticalNavLink = ({
           {...(item.openInNewTab ? { target: '_blank' } : null)}
           onClick={e => {
             if (item.path === undefined) {
-              e.preventDefault();
-              e.stopPropagation();
+              e.preventDefault()
+              e.stopPropagation()
             }
             if (navVisible) {
-              toggleNavVisibility();
+              toggleNavVisibility()
             }
           }}
           sx={{
@@ -155,7 +155,7 @@ const VerticalNavLink = ({
             ...conditionalBgColor(),
             ...(item.disabled ? { pointerEvents: 'none' } : { cursor: 'pointer' }),
             pr: navCollapsed && !navHover ? (collapsedNavWidth - navigationBorderWidth - 24 - 16) / 8 : 3,
-            pl: navCollapsed && !navHover ? (collapsedNavWidth - navigationBorderWidth - 24 - 16) / 8 : 4,
+            pl: navCollapsed && !navHover ? (collapsedNavWidth - navigationBorderWidth - 24 - 16) / 8 : 4
           }}
         >
           {isSubToSub ? null : (
@@ -167,8 +167,8 @@ const VerticalNavLink = ({
                 ...(parent ? { ml: 2, mr: 4 } : {}), // This line should be after (navCollapsed && !navHover) condition for proper styling
                 '& svg': {
                   ...(!parent ? { fontSize: '1.5rem' } : { fontSize: '0.5rem' }),
-                  ...(parent && item.icon ? { fontSize: '0.875rem' } : {}),
-                },
+                  ...(parent && item.icon ? { fontSize: '0.875rem' } : {})
+                }
               }}
             >
               <UserIcon icon={icon as string} />
@@ -178,12 +178,12 @@ const VerticalNavLink = ({
           <MenuItemTextMetaWrapper
             sx={{
               ...(isSubToSub ? { ml: 8 } : {}),
-              ...(navCollapsed && !navHover ? { opacity: 0 } : { opacity: 1 }),
+              ...(navCollapsed && !navHover ? { opacity: 0 } : { opacity: 1 })
             }}
           >
             <Typography
               {...((themeConfig.menuTextTruncate || (!themeConfig.menuTextTruncate && navCollapsed && !navHover)) && {
-                noWrap: true,
+                noWrap: true
               })}
             >
               <Translations text={item.title} />
@@ -200,7 +200,7 @@ const VerticalNavLink = ({
         </MenuNavLink>
       </ListItem>
     </>
-  );
-};
+  )
+}
 
-export default VerticalNavLink;
+export default VerticalNavLink

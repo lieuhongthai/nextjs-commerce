@@ -1,4 +1,4 @@
-import { ThemeConfig } from '@/@core/types/config/type';
+import { ThemeConfig } from '@/@core/types/config/type'
 
 const themeConfig: ThemeConfig = {
   // ** Layout Configs
@@ -7,7 +7,7 @@ const themeConfig: ThemeConfig = {
   mode: 'semi-dark' /* light | dark | semi-dark /*! Note: semi-dark value will only work for Vertical Layout */,
   direction: 'ltr' /* ltr | rtl */,
   skin: 'default' /* default | bordered */,
-  contentWidth: 'boxed' /* full | boxed */,
+  contentWidth: 'full' /* full | boxed */,
   footer: 'static' /* fixed | static | hidden */,
 
   // ** Routing Configs
@@ -34,7 +34,7 @@ const themeConfig: ThemeConfig = {
   responsiveFontSizes: true /* true | false */,
   disableRipple: false /* true | false */,
   disableCustomizer: false /* true | false */,
-  toastPosition: 'top-right' /* top-left | top-center | top-right | bottom-left | bottom-center | bottom-right */,
-};
+  toastPosition: 'top-right' /* top-left | top-center | top-right | bottom-left | bottom-center | bottom-right */
+}
 
-export default themeConfig;
+export default themeConfig

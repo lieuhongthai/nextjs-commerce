@@ -1,58 +1,58 @@
 // ** React Imports
-import { useState, SyntheticEvent, Fragment, ReactNode } from 'react';
+import { useState, SyntheticEvent, Fragment, ReactNode } from 'react'
 
 // ** MUI Imports
-import Box from '@mui/material/Box';
-import Badge from '@mui/material/Badge';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import { styled, Theme } from '@mui/material/styles';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import MuiMenu, { MenuProps } from '@mui/material/Menu';
-import MuiMenuItem, { MenuItemProps } from '@mui/material/MenuItem';
-import Typography, { TypographyProps } from '@mui/material/Typography';
+import Box from '@mui/material/Box'
+import Badge from '@mui/material/Badge'
+import Button from '@mui/material/Button'
+import IconButton from '@mui/material/IconButton'
+import { styled, Theme } from '@mui/material/styles'
+import useMediaQuery from '@mui/material/useMediaQuery'
+import MuiMenu, { MenuProps } from '@mui/material/Menu'
+import MuiMenuItem, { MenuItemProps } from '@mui/material/MenuItem'
+import Typography, { TypographyProps } from '@mui/material/Typography'
 
 // ** Icon Imports
-import Icon from 'src/@core/components/icon';
+import Icon from '@/@core/components/icon'
 
 // ** Third Party Components
-import PerfectScrollbarComponent from 'react-perfect-scrollbar';
+import PerfectScrollbarComponent from 'react-perfect-scrollbar'
 
 // ** Type Imports
 
 // ** Custom Components Imports
-import CustomChip from '@/@core/components/mui/chip';
-import CustomAvatar from '@/@core/components/mui/avatar';
+import CustomChip from '@/@core/components/mui/chip'
+import CustomAvatar from '@/@core/components/mui/avatar'
 
 // ** Util Import
-import { CustomAvatarProps, Settings, ThemeColor } from '@/@core/types/mui/type';
-import { getInitials } from '@/utils/get-initials';
-import themeConfig from '@/configs/themeConfig';
+import { CustomAvatarProps, Settings, ThemeColor } from '@/@core/types/mui/type'
+import { getInitials } from '@/@core/utils/get-initials'
+import themeConfig from '@/configs/themeConfig'
 
 export type NotificationsType = {
-  meta: string;
-  title: string;
-  subtitle: string;
+  meta: string
+  title: string
+  subtitle: string
 } & (
   | { avatarAlt: string; avatarImg: string; avatarText?: never; avatarColor?: never; avatarIcon?: never }
   | {
-      avatarAlt?: never;
-      avatarImg?: never;
-      avatarText: string;
-      avatarIcon?: never;
-      avatarColor?: ThemeColor;
+      avatarAlt?: never
+      avatarImg?: never
+      avatarText: string
+      avatarIcon?: never
+      avatarColor?: ThemeColor
     }
   | {
-      avatarAlt?: never;
-      avatarImg?: never;
-      avatarText?: never;
-      avatarIcon: ReactNode;
-      avatarColor?: ThemeColor;
+      avatarAlt?: never
+      avatarImg?: never
+      avatarText?: never
+      avatarIcon: ReactNode
+      avatarColor?: ThemeColor
     }
-);
+)
 interface Props {
-  settings: Settings;
-  notifications: NotificationsType[];
+  settings: Settings
+  notifications: NotificationsType[]
 }
 
 // ** Styled Menu component
@@ -62,34 +62,34 @@ const Menu = styled(MuiMenu)<MenuProps>(({ theme }) => ({
     overflow: 'hidden',
     marginTop: theme.spacing(4),
     [theme.breakpoints.down('sm')]: {
-      width: '100%',
-    },
+      width: '100%'
+    }
   },
   '& .MuiMenu-list': {
-    padding: 0,
-  },
-}));
+    padding: 0
+  }
+}))
 
 // ** Styled MenuItem component
 const MenuItem = styled(MuiMenuItem)<MenuItemProps>(({ theme }) => ({
   paddingTop: theme.spacing(3),
   paddingBottom: theme.spacing(3),
   '&:not(:last-of-type)': {
-    borderBottom: `1px solid ${theme.palette.divider}`,
-  },
-}));
+    borderBottom: `1px solid ${theme.palette.divider}`
+  }
+}))
 
 // ** Styled PerfectScrollbar component
 const PerfectScrollbar = styled(PerfectScrollbarComponent)({
-  maxHeight: 344,
-});
+  maxHeight: 344
+})
 
 // ** Styled Avatar component
 const Avatar = styled(CustomAvatar)<CustomAvatarProps>({
   width: 38,
   height: 38,
-  fontSize: '1.125rem',
-});
+  fontSize: '1.125rem'
+})
 
 // ** Styled component for the title in MenuItems
 const MenuItemTitle = styled(Typography)<TypographyProps>(({ theme }) => ({
@@ -99,65 +99,65 @@ const MenuItemTitle = styled(Typography)<TypographyProps>(({ theme }) => ({
   fontSize: '0.875rem',
   whiteSpace: 'nowrap',
   textOverflow: 'ellipsis',
-  marginBottom: theme.spacing(0.75),
-}));
+  marginBottom: theme.spacing(0.75)
+}))
 
 // ** Styled component for the subtitle in MenuItems
 const MenuItemSubtitle = styled(Typography)<TypographyProps>({
   flex: '1 1 100%',
   overflow: 'hidden',
   whiteSpace: 'nowrap',
-  textOverflow: 'ellipsis',
-});
+  textOverflow: 'ellipsis'
+})
 
 const ScrollWrapper = ({ children, hidden }: { children: ReactNode; hidden: boolean }) => {
   if (hidden) {
-    return <Box sx={{ maxHeight: 349, overflowY: 'auto', overflowX: 'hidden' }}>{children}</Box>;
+    return <Box sx={{ maxHeight: 349, overflowY: 'auto', overflowX: 'hidden' }}>{children}</Box>
   } else {
-    return <PerfectScrollbar options={{ wheelPropagation: false, suppressScrollX: true }}>{children}</PerfectScrollbar>;
+    return <PerfectScrollbar options={{ wheelPropagation: false, suppressScrollX: true }}>{children}</PerfectScrollbar>
   }
-};
+}
 
 const NotificationDropdown = (props: Props) => {
   // ** Props
-  const { settings, notifications } = props;
+  const { settings, notifications } = props
 
   // ** States
-  const [anchorEl, setAnchorEl] = useState<(EventTarget & Element) | null>(null);
+  const [anchorEl, setAnchorEl] = useState<(EventTarget & Element) | null>(null)
 
   // ** Hook
-  const hidden = useMediaQuery((theme: Theme) => theme.breakpoints.down('lg'));
+  const hidden = useMediaQuery((theme: Theme) => theme.breakpoints.down('lg'))
 
   // ** Vars
-  const { direction } = settings;
+  const { direction } = settings
 
   const handleDropdownOpen = (event: SyntheticEvent) => {
-    setAnchorEl(event.currentTarget);
-  };
+    setAnchorEl(event.currentTarget)
+  }
 
   const handleDropdownClose = () => {
-    setAnchorEl(null);
-  };
+    setAnchorEl(null)
+  }
 
   const RenderAvatar = ({ notification }: { notification: NotificationsType }) => {
-    const { avatarAlt, avatarImg, avatarIcon, avatarText, avatarColor } = notification;
+    const { avatarAlt, avatarImg, avatarIcon, avatarText, avatarColor } = notification
 
     if (avatarImg) {
-      return <Avatar alt={avatarAlt} src={avatarImg} />;
+      return <Avatar alt={avatarAlt} src={avatarImg} />
     } else if (avatarIcon) {
       return (
         <Avatar skin='light' color={avatarColor}>
           {avatarIcon}
         </Avatar>
-      );
+      )
     } else {
       return (
         <Avatar skin='light' color={avatarColor}>
           {getInitials(avatarText as string)}
         </Avatar>
-      );
+      )
     }
-  };
+  }
 
   return (
     <Fragment>
@@ -170,8 +170,8 @@ const NotificationDropdown = (props: Props) => {
             '& .MuiBadge-badge': {
               top: 4,
               right: 4,
-              boxShadow: theme => `0 0 0 2px ${theme.palette.background.paper}`,
-            },
+              boxShadow: theme => `0 0 0 2px ${theme.palette.background.paper}`
+            }
           }}
         >
           <Icon icon='mdi:bell-outline' />
@@ -225,7 +225,7 @@ const NotificationDropdown = (props: Props) => {
             cursor: 'default',
             userSelect: 'auto',
             backgroundColor: 'transparent !important',
-            borderTop: theme => `1px solid ${theme.palette.divider}`,
+            borderTop: theme => `1px solid ${theme.palette.divider}`
           }}
         >
           <Button fullWidth variant='contained' onClick={handleDropdownClose}>
@@ -234,7 +234,7 @@ const NotificationDropdown = (props: Props) => {
         </MenuItem>
       </Menu>
     </Fragment>
-  );
-};
+  )
+}
 
-export default NotificationDropdown;
+export default NotificationDropdown

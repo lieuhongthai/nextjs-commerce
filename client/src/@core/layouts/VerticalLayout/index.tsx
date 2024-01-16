@@ -20,7 +20,7 @@ import themeConfig from '@/configs/themeConfig';
 import AppBar from './components/appBar';
 import Navigation from './components/navigation';
 import ScrollToTop from '@/@core/components/scroll-to-top';
-import { LayoutProps } from '@/@core/types/mui/type';
+import { LayoutProps, Settings } from '@/@core/types/mui/type';
 import Footer from './components/footer';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
@@ -78,7 +78,11 @@ const VerticalLayout = (props: LayoutProps) => {
           collapsedNavWidth={collapsedNavWidth}
           toggleNavVisibility={toggleNavVisibility}
           navigationBorderWidth={navigationBorderWidth}
-          {...props}
+          hidden={hidden}
+          settings={settings}
+          // eslint-disable-next-line react/no-children-prop
+          children={children}
+          saveSettings={props.saveSettings}
         />
         <MainContentWrapper
           className='layout-content-wrapper'

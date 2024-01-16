@@ -1,30 +1,31 @@
-'use client';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { ReactNode } from 'react';
-import paletteMui from './palette';
-import { Settings } from '../types/mui/type';
-import typographyMui from './typography';
-import breakpointMui from './breakpoints';
-import transitionMui from './transitions';
-import zIndexMui from './zIndex';
-import componentMui from './components';
-import CssBaseline from '@mui/material/CssBaseline';
-import { GlobalStyles } from '@mui/material';
-import GlobalStyling from './globalStyles';
-import { CacheProvider } from '@emotion/react';
-import { createEmotionCache } from '@/utils/create-emotion-cache';
-import Shadows from './shadows';
+'use client'
+import { ThemeProvider, createTheme } from '@mui/material/styles'
+import { ReactNode } from 'react'
+import paletteMui from './palette'
+import { Settings } from '../types/mui/type'
+import typographyMui from './typography'
+import breakpointMui from './breakpoints'
+import transitionMui from './transitions'
+import zIndexMui from './zIndex'
+import componentMui from './components'
+import CssBaseline from '@mui/material/CssBaseline'
+import { GlobalStyles } from '@mui/material'
+import GlobalStyling from './globalStyles'
+import { CacheProvider } from '@emotion/react'
+import { createEmotionCache } from '@/@core/utils/create-emotion-cache'
+import Shadows from './shadows'
+import { ThemeComponentType } from '../types/theme-component/type'
 
 interface Props {
-  settings: Settings;
-  children: ReactNode;
+  settings: Settings
+  children: ReactNode
 }
 
-const cache = createEmotionCache();
+const cache = createEmotionCache()
 
-const ThemeComponent = (props: Props) => {
+const ThemeComponent = (props: ThemeComponentType) => {
   // ** Props
-  const { settings, children } = props;
+  const { settings, children } = props
 
   const theme = createTheme(
     {
@@ -32,8 +33,8 @@ const ThemeComponent = (props: Props) => {
       direction: 'ltr',
       mixins: {
         toolbar: {
-          minHeight: 64,
-        },
+          minHeight: 64
+        }
       },
       components: componentMui(settings),
       palette: paletteMui(settings.mode === 'light' ? 'light' : 'dark'),
@@ -42,10 +43,10 @@ const ThemeComponent = (props: Props) => {
       transitions: transitionMui(),
       typography: palette => typographyMui(palette),
       zIndex: zIndexMui(),
-      shadows: Shadows(settings.mode),
+      shadows: Shadows(settings.mode)
     },
-    {},
-  );
+    {}
+  )
 
   // ** Render
   return (
@@ -56,7 +57,7 @@ const ThemeComponent = (props: Props) => {
         {children}
       </ThemeProvider>
     </CacheProvider>
-  );
-};
+  )
+}
 
-export default ThemeComponent;
+export default ThemeComponent

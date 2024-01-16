@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\""
+    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
+    "lint-custom": "eslint --fix \"src/**/*.{js,jsx,ts,tsx}\"",
+    "build:icons": "tsc -b src/iconify-bundle && node src/iconify-bundle/bundle-icons-react.js"
   },
   "dependencies": {
     "@emotion/cache": "^11.11.0",
@@ -17,10 +19,13 @@
     "@iconify/react": "^4.1.1",
     "@mui/material": "^5.15.4",
     "@mui/material-nextjs": "^5.15.3",
+    "axios": "^1.6.5",
+    "axios-mock-adapter": "^1.22.0",
     "negotiator": "^0.6.3",
     "next": "14.0.4",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-perfect-scrollbar": "^1.5.8"
   },
   "devDependencies": {
     "@types/negotiator": "^0.6.3",

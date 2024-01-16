@@ -1,23 +1,23 @@
 // ** React Imports
-import { useState, SyntheticEvent, Fragment } from 'react';
+import { useState, SyntheticEvent, Fragment } from 'react'
 
 // ** Next Import
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation'
 
 // ** MUI Imports
-import Box from '@mui/material/Box';
-import Menu from '@mui/material/Menu';
-import Badge from '@mui/material/Badge';
-import Avatar from '@mui/material/Avatar';
-import Divider from '@mui/material/Divider';
-import MenuItem from '@mui/material/MenuItem';
-import { styled } from '@mui/material/styles';
-import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box'
+import Menu from '@mui/material/Menu'
+import Badge from '@mui/material/Badge'
+import Avatar from '@mui/material/Avatar'
+import Divider from '@mui/material/Divider'
+import MenuItem from '@mui/material/MenuItem'
+import { styled } from '@mui/material/styles'
+import Typography from '@mui/material/Typography'
 
 // ** Icon Imports
-import Icon from 'src/@core/components/icon';
-import { Settings } from '@/@core/types/mui/type';
-import themeConfig from '@/configs/themeConfig';
+import Icon from '@/@core/components/icon'
+import { Settings } from '@/@core/types/mui/type'
+import themeConfig from '@/configs/themeConfig'
 
 // ** Type Imports
 
@@ -27,31 +27,31 @@ const BadgeContentSpan = styled('span')(({ theme }) => ({
   height: 8,
   borderRadius: '50%',
   backgroundColor: theme.palette.success.main,
-  boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
-}));
+  boxShadow: `0 0 0 2px ${theme.palette.background.paper}`
+}))
 
 const UserDropdown = () => {
   // ** States
-  const [anchorEl, setAnchorEl] = useState<Element | null>(null);
+  const [anchorEl, setAnchorEl] = useState<Element | null>(null)
 
   // ** Hooks
-  const router = useRouter();
+  const router = useRouter()
 
   //   const { logout } = useAuth();
 
   // ** Vars
-  const { direction } = themeConfig;
+  const { direction } = themeConfig
 
   const handleDropdownOpen = (event: SyntheticEvent) => {
-    setAnchorEl(event.currentTarget);
-  };
+    setAnchorEl(event.currentTarget)
+  }
 
   const handleDropdownClose = (url?: string) => {
     if (url) {
-      router.push(url);
+      router.push(url)
     }
-    setAnchorEl(null);
-  };
+    setAnchorEl(null)
+  }
 
   const styles = {
     py: 2,
@@ -64,14 +64,14 @@ const UserDropdown = () => {
     '& svg': {
       mr: 2,
       fontSize: '1.375rem',
-      color: 'text.primary',
-    },
-  };
+      color: 'text.primary'
+    }
+  }
 
   const handleLogout = () => {
     // logout();
-    handleDropdownClose();
-  };
+    handleDropdownClose()
+  }
 
   return (
     <Fragment>
@@ -82,7 +82,7 @@ const UserDropdown = () => {
         badgeContent={<BadgeContentSpan />}
         anchorOrigin={{
           vertical: 'bottom',
-          horizontal: 'right',
+          horizontal: 'right'
         }}
       >
         <Avatar
@@ -107,7 +107,7 @@ const UserDropdown = () => {
               badgeContent={<BadgeContentSpan />}
               anchorOrigin={{
                 vertical: 'bottom',
-                horizontal: 'right',
+                horizontal: 'right'
               }}
             >
               <Avatar alt='John Doe' src='/images/avatars/1.png' sx={{ width: '2.5rem', height: '2.5rem' }} />
@@ -168,7 +168,7 @@ const UserDropdown = () => {
         </MenuItem>
       </Menu>
     </Fragment>
-  );
-};
+  )
+}
 
-export default UserDropdown;
+export default UserDropdown

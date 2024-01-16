@@ -1,65 +1,65 @@
 // ** React Imports
-import { useEffect, useCallback, useRef, useState, ChangeEvent } from 'react';
+import { useEffect, useCallback, useRef, useState, ChangeEvent } from 'react'
 
 // ** Next Imports
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 // ** MUI Imports
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import List from '@mui/material/List';
-import MuiDialog from '@mui/material/Dialog';
-import ListItem from '@mui/material/ListItem';
-import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import { styled, useTheme } from '@mui/material/styles';
-import ListItemButton from '@mui/material/ListItemButton';
-import InputAdornment from '@mui/material/InputAdornment';
-import MuiAutocomplete, { AutocompleteRenderInputParams } from '@mui/material/Autocomplete';
+import Box from '@mui/material/Box'
+import Grid from '@mui/material/Grid'
+import List from '@mui/material/List'
+import MuiDialog from '@mui/material/Dialog'
+import ListItem from '@mui/material/ListItem'
+import TextField from '@mui/material/TextField'
+import Typography from '@mui/material/Typography'
+import IconButton from '@mui/material/IconButton'
+import useMediaQuery from '@mui/material/useMediaQuery'
+import { styled, useTheme } from '@mui/material/styles'
+import ListItemButton from '@mui/material/ListItemButton'
+import InputAdornment from '@mui/material/InputAdornment'
+import MuiAutocomplete, { AutocompleteRenderInputParams } from '@mui/material/Autocomplete'
 
 // ** Third Party Imports
-import axios from 'axios';
+import axios from 'axios'
 
 // ** Types Imports
 
 // ** Icon Imports
-import Icon from 'src/@core/components/icon';
+import Icon from '@/@core/components/icon'
 
 // ** Configs Imports
-import themeConfig from 'src/configs/themeConfig';
-import { Settings } from '@/@core/types/mui/type';
+import themeConfig from '@/configs/themeConfig'
+import { Settings } from '@/@core/types/mui/type'
 
 type AppBarSearchType = {
-  id: number;
-  url: string;
-  icon: string;
-  title: string;
-  category: string;
-};
+  id: number
+  url: string
+  icon: string
+  title: string
+  category: string
+}
 interface Props {
-  hidden: boolean;
-  settings: Settings;
+  hidden: boolean
+  settings: Settings
 }
 
 interface DefaultSuggestionsProps {
-  setOpenDialog: (val: boolean) => void;
+  setOpenDialog: (val: boolean) => void
 }
 
 interface NoResultProps {
-  value: string;
-  setOpenDialog: (val: boolean) => void;
+  value: string
+  setOpenDialog: (val: boolean) => void
 }
 
 interface DefaultSuggestionsType {
-  category: string;
+  category: string
   suggestions: {
-    link: string;
-    icon: string;
-    suggestion: string;
-  }[];
+    link: string
+    icon: string
+    suggestion: string
+  }[]
 }
 
 const defaultSuggestionsData: DefaultSuggestionsType[] = [
@@ -69,24 +69,24 @@ const defaultSuggestionsData: DefaultSuggestionsType[] = [
       {
         icon: 'mdi:chart-donut',
         suggestion: 'CRM',
-        link: '/dashboards/crm',
+        link: '/dashboards/crm'
       },
       {
         icon: 'mdi:poll',
         suggestion: 'Analytics',
-        link: '/dashboards/analytics',
+        link: '/dashboards/analytics'
       },
       {
         icon: 'mdi:chart-bubble',
         suggestion: 'eCommerce',
-        link: '/dashboards/ecommerce',
+        link: '/dashboards/ecommerce'
       },
       {
         icon: 'mdi:account-group',
         suggestion: 'User List',
-        link: '/apps/user/list',
-      },
-    ],
+        link: '/apps/user/list'
+      }
+    ]
   },
   {
     category: 'Apps & Pages',
@@ -94,24 +94,24 @@ const defaultSuggestionsData: DefaultSuggestionsType[] = [
       {
         icon: 'mdi:calendar-blank',
         suggestion: 'Calendar',
-        link: '/apps/calendar',
+        link: '/apps/calendar'
       },
       {
         icon: 'mdi:format-list-numbered',
         suggestion: 'Invoice List',
-        link: '/apps/invoice/list',
+        link: '/apps/invoice/list'
       },
       {
         icon: 'mdi:currency-usd',
         suggestion: 'Pricing',
-        link: '/pages/pricing',
+        link: '/pages/pricing'
       },
       {
         icon: 'mdi:account-cog-outline',
         suggestion: 'Account Settings',
-        link: '/pages/account-settings/account',
-      },
-    ],
+        link: '/pages/account-settings/account'
+      }
+    ]
   },
   {
     category: 'User Interface',
@@ -119,24 +119,24 @@ const defaultSuggestionsData: DefaultSuggestionsType[] = [
       {
         icon: 'mdi:format-text-variant-outline',
         suggestion: 'Typography',
-        link: '/ui/typography',
+        link: '/ui/typography'
       },
       {
         icon: 'mdi:tab',
         suggestion: 'Tabs',
-        link: '/components/tabs',
+        link: '/components/tabs'
       },
       {
         icon: 'mdi:gesture-tap-button',
         suggestion: 'Buttons',
-        link: '/components/buttons',
+        link: '/components/buttons'
       },
       {
         icon: 'mdi:card-bulleted-settings-outline',
         suggestion: 'Advanced Cards',
-        link: '/ui/cards/advanced',
-      },
-    ],
+        link: '/ui/cards/advanced'
+      }
+    ]
   },
   {
     category: 'Forms & Tables',
@@ -144,39 +144,39 @@ const defaultSuggestionsData: DefaultSuggestionsType[] = [
       {
         icon: 'mdi:format-list-checkbox',
         suggestion: 'Select',
-        link: '/forms/form-elements/select',
+        link: '/forms/form-elements/select'
       },
       {
         icon: 'mdi:lastpass',
         suggestion: 'Autocomplete',
-        link: '/forms/form-elements/autocomplete',
+        link: '/forms/form-elements/autocomplete'
       },
       {
         icon: 'mdi:view-grid-outline',
         suggestion: 'Table',
-        link: '/tables/mui',
+        link: '/tables/mui'
       },
       {
         icon: 'mdi:calendar-range',
         suggestion: 'Date Pickers',
-        link: '/forms/form-elements/pickers',
-      },
-    ],
-  },
-];
+        link: '/forms/form-elements/pickers'
+      }
+    ]
+  }
+]
 
 const categoryTitle: { [k: string]: string } = {
   dashboards: 'Dashboards',
   appsPages: 'Apps & Pages',
   userInterface: 'User Interface',
   formsTables: 'Forms & Tables',
-  chartsMisc: 'Charts & Misc',
-};
+  chartsMisc: 'Charts & Misc'
+}
 
 // ** Styled Autocomplete component
 const Autocomplete = styled(MuiAutocomplete)(({ theme }) => ({
   '& fieldset': {
-    border: 0,
+    border: 0
   },
   '& + .MuiAutocomplete-popper': {
     '& .MuiAutocomplete-listbox': {
@@ -189,41 +189,41 @@ const Autocomplete = styled(MuiAutocomplete)(({ theme }) => ({
         lineHeight: '15px',
         fontSize: '0.75rem',
         letterSpacing: '1px',
-        color: theme.palette.text.disabled,
-      },
+        color: theme.palette.text.disabled
+      }
     },
     '& .MuiAutocomplete-paper': {
       border: 0,
       height: '100%',
       borderRadius: 0,
-      boxShadow: 'none',
+      boxShadow: 'none'
     },
     '& .MuiListItem-root.suggestion': {
       padding: 0,
       '& .MuiListItemSecondaryAction-root': {
-        display: 'flex',
+        display: 'flex'
       },
       '&.Mui-focused.Mui-focusVisible, &:hover': {
-        backgroundColor: theme.palette.action.hover,
+        backgroundColor: theme.palette.action.hover
       },
       '& .MuiListItemButton-root: hover': {
-        backgroundColor: 'transparent',
+        backgroundColor: 'transparent'
       },
       '&:not(:hover)': {
         '& .MuiListItemSecondaryAction-root': {
-          display: 'none',
+          display: 'none'
         },
         '&.Mui-focused, &.Mui-focused.Mui-focusVisible:not(:hover)': {
           '& .MuiListItemSecondaryAction-root': {
-            display: 'flex',
-          },
+            display: 'flex'
+          }
         },
         [theme.breakpoints.down('sm')]: {
           '&.Mui-focused:not(.Mui-focusVisible) .MuiListItemSecondaryAction-root': {
-            display: 'none',
-          },
-        },
-      },
+            display: 'none'
+          }
+        }
+      }
     },
     '& .MuiAutocomplete-noOptions': {
       display: 'grid',
@@ -231,24 +231,24 @@ const Autocomplete = styled(MuiAutocomplete)(({ theme }) => ({
       alignItems: 'center',
       flexDirection: 'column',
       justifyContent: 'center',
-      padding: theme.spacing(10),
-    },
-  },
-}));
+      padding: theme.spacing(10)
+    }
+  }
+}))
 
 // ** Styled Dialog component
 const Dialog = styled(MuiDialog)({
   '& .MuiBackdrop-root': {
-    backdropFilter: 'blur(4px)',
+    backdropFilter: 'blur(4px)'
   },
   '& .MuiDialog-paper': {
     overflow: 'hidden',
     '&:not(.MuiDialog-paperFullScreen)': {
       height: '100%',
-      maxHeight: 550,
-    },
-  },
-});
+      maxHeight: 550
+    }
+  }
+})
 
 const NoResult = ({ value, setOpenDialog }: NoResultProps) => {
   return (
@@ -275,7 +275,7 @@ const NoResult = ({ value, setOpenDialog }: NoResultProps) => {
               display: 'flex',
               alignItems: 'center',
               textDecoration: 'none',
-              '&:hover > *': { color: 'primary.main' },
+              '&:hover > *': { color: 'primary.main' }
             }}
           >
             <Box sx={{ mr: 2.5, display: 'flex', color: 'text.primary' }}>
@@ -294,7 +294,7 @@ const NoResult = ({ value, setOpenDialog }: NoResultProps) => {
               display: 'flex',
               alignItems: 'center',
               textDecoration: 'none',
-              '&:hover > *': { color: 'primary.main' },
+              '&:hover > *': { color: 'primary.main' }
             }}
           >
             <Box sx={{ mr: 2.5, display: 'flex', color: 'text.primary' }}>
@@ -313,7 +313,7 @@ const NoResult = ({ value, setOpenDialog }: NoResultProps) => {
               display: 'flex',
               alignItems: 'center',
               textDecoration: 'none',
-              '&:hover > *': { color: 'primary.main' },
+              '&:hover > *': { color: 'primary.main' }
             }}
           >
             <Box sx={{ mr: 2.5, display: 'flex', color: 'text.primary' }}>
@@ -326,8 +326,8 @@ const NoResult = ({ value, setOpenDialog }: NoResultProps) => {
         </ListItem>
       </List>
     </Box>
-  );
-};
+  )
+}
 
 const DefaultSuggestions = ({ setOpenDialog }: DefaultSuggestionsProps) => {
   return (
@@ -350,7 +350,7 @@ const DefaultSuggestions = ({ setOpenDialog }: DefaultSuggestionsProps) => {
                     '& svg': { mr: 2.5 },
                     color: 'text.primary',
                     textDecoration: 'none',
-                    '&:hover > *': { color: 'primary.main' },
+                    '&:hover > *': { color: 'primary.main' }
                   }}
                 >
                   <Icon icon={suggestionItem.icon} fontSize={20} />
@@ -364,93 +364,93 @@ const DefaultSuggestions = ({ setOpenDialog }: DefaultSuggestionsProps) => {
         </Grid>
       ))}
     </Grid>
-  );
-};
+  )
+}
 
 const AutocompleteComponent = ({ hidden, settings }: Props) => {
   // ** States
-  const [isMounted, setIsMounted] = useState<boolean>(false);
-  const [searchValue, setSearchValue] = useState<string>('');
-  const [openDialog, setOpenDialog] = useState<boolean>(false);
-  const [options, setOptions] = useState<AppBarSearchType[]>([]);
+  const [isMounted, setIsMounted] = useState<boolean>(false)
+  const [searchValue, setSearchValue] = useState<string>('')
+  const [openDialog, setOpenDialog] = useState<boolean>(false)
+  const [options, setOptions] = useState<AppBarSearchType[]>([])
 
   // ** Hooks & Vars
-  const theme = useTheme();
-  const router = useRouter();
-  const { layout } = settings;
-  const wrapper = useRef<HTMLDivElement>(null);
-  const fullScreenDialog = useMediaQuery(theme.breakpoints.down('sm'));
+  const theme = useTheme()
+  const router = useRouter()
+  const { layout } = settings
+  const wrapper = useRef<HTMLDivElement>(null)
+  const fullScreenDialog = useMediaQuery(theme.breakpoints.down('sm'))
 
   // Get all data using API
   useEffect(() => {
-    axios
-      .get('/app-bar/search', {
-        params: { q: searchValue },
-      })
-      .then(response => {
-        if (response.data && response.data.length) {
-          setOptions(response.data);
-        } else {
-          setOptions([]);
-        }
-      });
-  }, [searchValue]);
+    // axios
+    //   .get('/app-bar/search', {
+    //     params: { q: searchValue }
+    //   })
+    //   .then(response => {
+    //     if (response.data && response.data.length) {
+    //       setOptions(response.data)
+    //     } else {
+    //       setOptions([])
+    //     }
+    //   })
+  }, [searchValue])
 
   useEffect(() => {
     if (!openDialog) {
-      setSearchValue('');
+      setSearchValue('')
     }
-  }, [openDialog]);
+  }, [openDialog])
 
   useEffect(() => {
-    setIsMounted(true);
+    setIsMounted(true)
 
-    return () => setIsMounted(false);
-  }, []);
+    return () => setIsMounted(false)
+  }, [])
 
   // Handle click event on a list item in search result
   const handleOptionClick = (obj: AppBarSearchType) => {
-    setSearchValue('');
-    setOpenDialog(false);
+    setSearchValue('')
+    setOpenDialog(false)
     if (obj.url) {
-      router.push(obj.url);
+      router.push(obj.url)
     }
-  };
+  }
 
   // Handle ESC & shortcut keys keydown events
   const handleKeydown = useCallback(
     (event: KeyboardEvent) => {
       // ** Shortcut keys to open searchbox (Ctrl + /)
       if (!openDialog && event.ctrlKey && event.which === 191) {
-        setOpenDialog(true);
+        setOpenDialog(true)
       }
     },
-    [openDialog],
-  );
+    [openDialog]
+  )
 
   // Handle shortcut keys keyup events
   const handleKeyUp = useCallback(
     (event: KeyboardEvent) => {
       // ** ESC key to close searchbox
       if (openDialog && event.keyCode === 27) {
-        setOpenDialog(false);
+        setOpenDialog(false)
       }
     },
-    [openDialog],
-  );
+    [openDialog]
+  )
 
   useEffect(() => {
-    document.addEventListener('keydown', handleKeydown);
-    document.addEventListener('keyup', handleKeyUp);
+    document.addEventListener('keydown', handleKeydown)
+    document.addEventListener('keyup', handleKeyUp)
 
     return () => {
-      document.removeEventListener('keydown', handleKeydown);
-      document.removeEventListener('keyup', handleKeyUp);
-    };
-  }, [handleKeyUp, handleKeydown]);
+      document.removeEventListener('keydown', handleKeydown)
+      document.removeEventListener('keyup', handleKeyUp)
+    }
+  }, [handleKeyUp, handleKeydown])
 
   if (!isMounted) {
-    return null;
+    return null
   } else {
     return (
       <Box
@@ -488,12 +488,12 @@ const AutocompleteComponent = ({ hidden, settings }: Props) => {
                           maxHeight: 'calc(100vh - 69px)',
                           borderTop: `1px solid ${theme.palette.divider}`,
                           height: fullScreenDialog ? 'calc(100vh - 69px)' : 481,
-                          '& .MuiListSubheader-root': { p: theme.spacing(3.75, 6, 0.75) },
+                          '& .MuiListSubheader-root': { p: theme.spacing(3.75, 6, 0.75) }
                         }
                       : {
-                          '& .MuiAutocomplete-listbox': { pb: 0 },
-                        }),
-                  },
+                          '& .MuiAutocomplete-listbox': { pb: 0 }
+                        })
+                  }
                 }}
                 renderInput={(params: AutocompleteRenderInputParams) => {
                   return (
@@ -504,9 +504,9 @@ const AutocompleteComponent = ({ hidden, settings }: Props) => {
                       inputRef={input => {
                         if (input) {
                           if (openDialog) {
-                            input.focus();
+                            input.focus()
                           } else {
-                            input.blur();
+                            input.blur()
                           }
                         }
                       }}
@@ -529,10 +529,10 @@ const AutocompleteComponent = ({ hidden, settings }: Props) => {
                               <Icon icon='mdi:close' fontSize={20} />
                             </IconButton>
                           </InputAdornment>
-                        ),
+                        )
                       }}
                     />
-                  );
+                  )
                 }}
                 renderOption={(props, option: AppBarSearchType | unknown) => {
                   return searchValue.length ? (
@@ -546,16 +546,16 @@ const AutocompleteComponent = ({ hidden, settings }: Props) => {
                         '& .MuiListItemSecondaryAction-root': {
                           '& svg': {
                             cursor: 'pointer',
-                            color: 'text.disabled',
-                          },
-                        },
+                            color: 'text.disabled'
+                          }
+                        }
                       }}
                     >
                       <ListItemButton
                         sx={{
                           py: 2.5,
                           px: `${theme.spacing(6)} !important`,
-                          '& svg': { mr: 2.5, color: 'text.primary' },
+                          '& svg': { mr: 2.5, color: 'text.primary' }
                         }}
                       >
                         <Icon fontSize={20} icon={(option as AppBarSearchType).icon || themeConfig.navSubItemIcon} />
@@ -564,7 +564,7 @@ const AutocompleteComponent = ({ hidden, settings }: Props) => {
                         </Typography>
                       </ListItemButton>
                     </ListItem>
-                  ) : null;
+                  ) : null
                 }}
               />
             </Box>
@@ -577,7 +577,7 @@ const AutocompleteComponent = ({ hidden, settings }: Props) => {
                   alignItems: 'center',
                   justifyContent: 'center',
                   borderTop: `1px solid ${theme.palette.divider}`,
-                  height: fullScreenDialog ? 'calc(100vh - 69px)' : '100%',
+                  height: fullScreenDialog ? 'calc(100vh - 69px)' : '100%'
                 }}
               >
                 <DefaultSuggestions setOpenDialog={setOpenDialog} />
@@ -586,8 +586,8 @@ const AutocompleteComponent = ({ hidden, settings }: Props) => {
           </Dialog>
         )}
       </Box>
-    );
+    )
   }
-};
+}
 
-export default AutocompleteComponent;
+export default AutocompleteComponent

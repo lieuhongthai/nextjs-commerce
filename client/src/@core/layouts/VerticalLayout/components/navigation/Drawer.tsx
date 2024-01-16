@@ -1,40 +1,40 @@
 // ** MUI Imports
-import { LayoutProps } from '@/@core/types/mui/type';
-import { styled, useTheme } from '@mui/material/styles';
-import MuiSwipeableDrawer, { SwipeableDrawerProps } from '@mui/material/SwipeableDrawer';
+import { LayoutProps } from '@/@core/types/mui/type'
+import { styled, useTheme } from '@mui/material/styles'
+import MuiSwipeableDrawer, { SwipeableDrawerProps } from '@mui/material/SwipeableDrawer'
 
 // ** Type Import
 
 interface Props {
-  navWidth: number;
-  navHover: boolean;
-  navVisible: boolean;
-  collapsedNavWidth: number;
-  hidden: LayoutProps['hidden'];
-  navigationBorderWidth: number;
-  settings: LayoutProps['settings'];
-  children: LayoutProps['children'];
-  setNavHover: (values: boolean) => void;
-  setNavVisible: (value: boolean) => void;
+  navWidth: number
+  navHover: boolean
+  navVisible: boolean
+  collapsedNavWidth: number
+  hidden: LayoutProps['hidden']
+  navigationBorderWidth: number
+  settings: LayoutProps['settings']
+  children: LayoutProps['children']
+  setNavHover: (values: boolean) => void
+  setNavVisible: (value: boolean) => void
 }
 
 const SwipeableDrawer = styled(MuiSwipeableDrawer)<SwipeableDrawerProps>({
   overflowX: 'hidden',
   transition: 'width .25s ease-in-out',
   '& ul': {
-    listStyle: 'none',
+    listStyle: 'none'
   },
   '& .MuiListItem-gutters': {
     paddingLeft: 4,
-    paddingRight: 4,
+    paddingRight: 4
   },
   '& .MuiDrawer-paper': {
     left: 'unset',
     right: 'unset',
     overflowX: 'hidden',
-    transition: 'width .25s ease-in-out, box-shadow .25s ease-in-out',
-  },
-});
+    transition: 'width .25s ease-in-out, box-shadow .25s ease-in-out'
+  }
+})
 
 const Drawer = (props: Props) => {
   // ** Props
@@ -48,30 +48,30 @@ const Drawer = (props: Props) => {
     setNavHover,
     setNavVisible,
     collapsedNavWidth,
-    navigationBorderWidth,
-  } = props;
+    navigationBorderWidth
+  } = props
 
   // ** Hook
-  const theme = useTheme();
+  const theme = useTheme()
 
   // ** Vars
-  const { mode, navCollapsed } = settings;
+  const { mode, navCollapsed } = settings
 
-  let flag = true;
+  let flag = true
 
   const drawerColors = () => {
     if (mode === 'semi-dark') {
       return {
         backgroundColor: 'customColors.darkBg',
         '& .MuiTypography-root': {
-          color: `rgba(${theme.palette.customColors.dark}, 0.87)`,
-        },
-      };
+          color: `rgba(${theme.palette.customColors.dark}, 0.87)`
+        }
+      }
     } else
       return {
-        backgroundColor: 'background.default',
-      };
-  };
+        backgroundColor: 'background.default'
+      }
+  }
 
   // Drawer Props for Mobile & Tablet screens
   const MobileDrawerProps = {
@@ -79,9 +79,9 @@ const Drawer = (props: Props) => {
     onOpen: () => setNavVisible(true),
     onClose: () => setNavVisible(false),
     ModalProps: {
-      keepMounted: true, // Better open performance on mobile.
-    },
-  };
+      keepMounted: true // Better open performance on mobile.
+    }
+  }
 
   // Drawer Props for Laptop & Desktop screens
   const DesktopDrawerProps = {
@@ -91,16 +91,16 @@ const Drawer = (props: Props) => {
     onMouseEnter: () => {
       // Declared flag to resolve first time flicker issue while trying to collapse the menu
       if (flag || navCollapsed) {
-        setNavHover(true);
-        flag = false;
+        setNavHover(true)
+        flag = false
       }
     },
     onMouseLeave: () => {
       if (navCollapsed) {
-        setNavHover(false);
+        setNavHover(false)
       }
-    },
-  };
+    }
+  }
 
   return (
     <SwipeableDrawer
@@ -112,16 +112,16 @@ const Drawer = (props: Props) => {
           ...drawerColors(),
           width: navCollapsed && !navHover ? collapsedNavWidth : navWidth,
           ...(!hidden && navCollapsed && navHover ? { boxShadow: 10 } : {}),
-          borderRight: navigationBorderWidth === 0 ? 0 : `${navigationBorderWidth}px solid ${theme.palette.divider}`,
-        },
+          borderRight: navigationBorderWidth === 0 ? 0 : `${navigationBorderWidth}px solid ${theme.palette.divider}`
+        }
       }}
       sx={{
-        width: navCollapsed ? collapsedNavWidth : navWidth,
+        width: navCollapsed ? collapsedNavWidth : navWidth
       }}
     >
       {children}
     </SwipeableDrawer>
-  );
-};
+  )
+}
 
-export default Drawer;
+export default Drawer
