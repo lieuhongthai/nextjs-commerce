@@ -1,28 +1,27 @@
 // ** MUI Imports
-import { Settings } from '@/@core/types/mui/type'
-import { ThemeSettings } from '@/@core/types/theme-component/type'
-import themeConfig from '@/configs/themeConfig'
-import { Components, Theme, ThemeOptions, darken, lighten } from '@mui/material/styles'
+import { ThemeSettings } from '@/@core/types/theme-component/type';
+import themeConfig from '@/configs/themeConfig';
+import { ThemeOptions, darken, lighten } from '@mui/material/styles';
 
-type ComponentsMui = ThemeOptions['components']
+type ComponentsMui = ThemeOptions['components'];
 
 const hexToRGBA = (hexCode: string, opacity: number) => {
-  let hex = hexCode.replace('#', '')
+  let hex = hexCode.replace('#', '');
 
   if (hex.length === 3) {
-    hex = `${hex[0]}${hex[0]}${hex[1]}${hex[1]}${hex[2]}${hex[2]}`
+    hex = `${hex[0]}${hex[0]}${hex[1]}${hex[1]}${hex[2]}${hex[2]}`;
   }
 
-  const r = parseInt(hex.substring(0, 2), 16)
-  const g = parseInt(hex.substring(2, 4), 16)
-  const b = parseInt(hex.substring(4, 6), 16)
+  const r = parseInt(hex.substring(0, 2), 16);
+  const g = parseInt(hex.substring(2, 4), 16);
+  const b = parseInt(hex.substring(4, 6), 16);
 
-  return `rgba(${r}, ${g}, ${b}, ${opacity})`
-}
+  return `rgba(${r}, ${g}, ${b}, ${opacity})`;
+};
 const componentMui = (settings: ThemeSettings): ComponentsMui => {
-  const { skin, mode } = settings
+  const { skin, mode } = settings;
 
-  const getColor = mode === 'light' ? darken : lighten
+  const getColor = mode === 'light' ? darken : lighten;
   return {
     // **
     // MuiGrid: {},
@@ -33,31 +32,31 @@ const componentMui = (settings: ThemeSettings): ComponentsMui => {
           boxShadow: theme.shadows[skin === 'bordered' ? 0 : 1],
           '&:first-of-type': {
             borderTopLeftRadius: 8,
-            borderTopRightRadius: 8
+            borderTopRightRadius: 8,
           },
           '&:last-of-type': {
             borderBottomLeftRadius: 8,
-            borderBottomRightRadius: 8
+            borderBottomRightRadius: 8,
           },
           ...(skin === 'bordered' && {
             '&:before': { display: 'none' },
             borderLeft: `1px solid ${theme.palette.divider}`,
             borderRight: `1px solid ${theme.palette.divider}`,
             borderBottom: `1px solid ${theme.palette.divider}`,
-            '&:first-of-type': { borderTop: `1px solid ${theme.palette.divider}` }
+            '&:first-of-type': { borderTop: `1px solid ${theme.palette.divider}` },
           }),
           '&.Mui-disabled': {
-            backgroundColor: `rgba(${theme.palette.customColors.main}, 0.12)`
+            backgroundColor: `rgba(${theme.palette.customColors.main}, 0.12)`,
           },
           '&.Mui-expanded': {
             boxShadow: theme.shadows[skin === 'bordered' ? 0 : 3],
             '&:not(:first-of-type)': { borderTop: `1px solid ${theme.palette.divider}` },
             ...(skin === 'bordered' && {
-              '& + .MuiAccordion-root': { borderTop: `1px solid ${theme.palette.divider}` }
-            })
-          }
-        })
-      }
+              '& + .MuiAccordion-root': { borderTop: `1px solid ${theme.palette.divider}` },
+            }),
+          },
+        }),
+      },
     },
     MuiAccordionSummary: {
       styleOverrides: {
@@ -67,28 +66,28 @@ const componentMui = (settings: ThemeSettings): ComponentsMui => {
           padding: `0 ${theme.spacing(5)}`,
           '&.Mui-expanded': {
             borderBottomLeftRadius: 0,
-            borderBottomRightRadius: 0
+            borderBottomRightRadius: 0,
           },
           '& + .MuiCollapse-root': {
             '& .MuiAccordionDetails-root:first-of-type': {
-              paddingTop: 0
-            }
-          }
+              paddingTop: 0,
+            },
+          },
         }),
         content: ({ theme }) => ({
-          margin: `${theme.spacing(2.5)} 0`
-        })
-      }
+          margin: `${theme.spacing(2.5)} 0`,
+        }),
+      },
     },
     MuiAccordionDetails: {
       styleOverrides: {
         root: ({ theme }) => ({
           padding: theme.spacing(5),
           '& + .MuiAccordionDetails-root': {
-            paddingTop: 0
-          }
-        })
-      }
+            paddingTop: 0,
+          },
+        }),
+      },
     },
 
     // ** Alert
@@ -97,98 +96,98 @@ const componentMui = (settings: ThemeSettings): ComponentsMui => {
         root: ({ theme }) => ({
           borderRadius: 8,
           '& .MuiAlertTitle-root': {
-            marginBottom: theme.spacing(1)
+            marginBottom: theme.spacing(1),
           },
           '& a': {
             fontWeight: 500,
-            color: 'inherit'
-          }
+            color: 'inherit',
+          },
         }),
         standardSuccess: ({ theme }) => ({
           color: getColor(theme.palette.success.main, 0.1),
           backgroundColor: hexToRGBA(theme.palette.success.main, 0.12),
           '& .MuiAlertTitle-root': {
-            color: getColor(theme.palette.success.main, 0.1)
+            color: getColor(theme.palette.success.main, 0.1),
           },
           '& .MuiAlert-icon': {
-            color: getColor(theme.palette.success.main, 0.1)
-          }
+            color: getColor(theme.palette.success.main, 0.1),
+          },
         }),
         standardInfo: ({ theme }) => ({
           color: getColor(theme.palette.info.main, 0.1),
           backgroundColor: hexToRGBA(theme.palette.info.main, 0.12),
           '& .MuiAlertTitle-root': {
-            color: getColor(theme.palette.info.main, 0.1)
+            color: getColor(theme.palette.info.main, 0.1),
           },
           '& .MuiAlert-icon': {
-            color: getColor(theme.palette.info.main, 0.1)
-          }
+            color: getColor(theme.palette.info.main, 0.1),
+          },
         }),
         standardWarning: ({ theme }) => ({
           color: getColor(theme.palette.warning.main, 0.1),
           backgroundColor: hexToRGBA(theme.palette.warning.main, 0.12),
           '& .MuiAlertTitle-root': {
-            color: getColor(theme.palette.warning.main, 0.1)
+            color: getColor(theme.palette.warning.main, 0.1),
           },
           '& .MuiAlert-icon': {
-            color: getColor(theme.palette.warning.main, 0.1)
-          }
+            color: getColor(theme.palette.warning.main, 0.1),
+          },
         }),
         standardError: ({ theme }) => ({
           color: getColor(theme.palette.error.main, 0.1),
           backgroundColor: hexToRGBA(theme.palette.error.main, 0.12),
           '& .MuiAlertTitle-root': {
-            color: getColor(theme.palette.error.main, 0.1)
+            color: getColor(theme.palette.error.main, 0.1),
           },
           '& .MuiAlert-icon': {
-            color: getColor(theme.palette.error.main, 0.1)
-          }
+            color: getColor(theme.palette.error.main, 0.1),
+          },
         }),
         outlinedSuccess: ({ theme }) => ({
           borderColor: theme.palette.success.main,
           color: getColor(theme.palette.success.main, 0.1),
           '& .MuiAlertTitle-root': {
-            color: getColor(theme.palette.success.main, 0.1)
+            color: getColor(theme.palette.success.main, 0.1),
           },
           '& .MuiAlert-icon': {
-            color: theme.palette.success.main
-          }
+            color: theme.palette.success.main,
+          },
         }),
         outlinedInfo: ({ theme }) => ({
           borderColor: theme.palette.info.main,
           color: getColor(theme.palette.info.main, 0.1),
           '& .MuiAlertTitle-root': {
-            color: getColor(theme.palette.info.main, 0.1)
+            color: getColor(theme.palette.info.main, 0.1),
           },
           '& .MuiAlert-icon': {
-            color: theme.palette.info.main
-          }
+            color: theme.palette.info.main,
+          },
         }),
         outlinedWarning: ({ theme }) => ({
           borderColor: theme.palette.warning.main,
           color: getColor(theme.palette.warning.main, 0.1),
           '& .MuiAlertTitle-root': {
-            color: getColor(theme.palette.warning.main, 0.1)
+            color: getColor(theme.palette.warning.main, 0.1),
           },
           '& .MuiAlert-icon': {
-            color: theme.palette.warning.main
-          }
+            color: theme.palette.warning.main,
+          },
         }),
         outlinedError: ({ theme }) => ({
           borderColor: theme.palette.error.main,
           color: getColor(theme.palette.error.main, 0.1),
           '& .MuiAlertTitle-root': {
-            color: getColor(theme.palette.error.main, 0.1)
+            color: getColor(theme.palette.error.main, 0.1),
           },
           '& .MuiAlert-icon': {
-            color: theme.palette.error.main
-          }
+            color: theme.palette.error.main,
+          },
         }),
         filled: ({ theme }) => ({
           fontWeight: 400,
-          color: theme.palette.common.white
-        })
-      }
+          color: theme.palette.common.white,
+        }),
+      },
     },
 
     // ** Autocomplete
@@ -196,9 +195,9 @@ const componentMui = (settings: ThemeSettings): ComponentsMui => {
       styleOverrides: {
         paper: ({ theme }) => ({
           boxShadow: theme.shadows[6],
-          ...(skin === 'bordered' && { boxShadow: 'none', border: `1px solid ${theme.palette.divider}` })
-        })
-      }
+          ...(skin === 'bordered' && { boxShadow: 'none', border: `1px solid ${theme.palette.divider}` }),
+        }),
+      },
     },
 
     // ** Avatar
@@ -206,12 +205,12 @@ const componentMui = (settings: ThemeSettings): ComponentsMui => {
       styleOverrides: {
         colorDefault: ({ theme }) => ({
           color: theme.palette.text.secondary,
-          backgroundColor: theme.palette.mode === 'light' ? theme.palette.grey[200] : theme.palette.grey[700]
+          backgroundColor: theme.palette.mode === 'light' ? theme.palette.grey[200] : theme.palette.grey[700],
         }),
         rounded: {
-          borderRadius: 8
-        }
-      }
+          borderRadius: 8,
+        },
+      },
     },
     MuiAvatarGroup: {
       styleOverrides: {
@@ -223,16 +222,16 @@ const componentMui = (settings: ThemeSettings): ComponentsMui => {
               '&:hover': {
                 zIndex: 2,
                 boxShadow: theme.shadows[3],
-                transform: 'translateY(-4px)'
-              }
-            }
+                transform: 'translateY(-4px)',
+              },
+            },
           },
           justifyContent: 'flex-end',
           '.MuiCard-root & .MuiAvatar-root': {
-            borderColor: theme.palette.background.paper
-          }
-        })
-      }
+            borderColor: theme.palette.background.paper,
+          },
+        }),
+      },
     },
 
     // ** Backdrop
@@ -242,12 +241,12 @@ const componentMui = (settings: ThemeSettings): ComponentsMui => {
           backgroundColor:
             theme.palette.mode === 'light'
               ? `rgba(${theme.palette.customColors.main}, 0.5)`
-              : hexToRGBA('#101121', 0.87)
+              : hexToRGBA('#101121', 0.87),
         }),
         invisible: {
-          backgroundColor: 'transparent'
-        }
-      }
+          backgroundColor: 'transparent',
+        },
+      },
     },
 
     // ** Breadcrumbs
@@ -255,10 +254,10 @@ const componentMui = (settings: ThemeSettings): ComponentsMui => {
       styleOverrides: {
         li: {
           '& > .MuiLink-root': {
-            textDecoration: 'none'
-          }
-        }
-      }
+            textDecoration: 'none',
+          },
+        },
+      },
     },
 
     // ** Button
@@ -270,87 +269,87 @@ const componentMui = (settings: ThemeSettings): ComponentsMui => {
           lineHeight: 1.715,
           padding: `${theme.spacing(1.75, 3)}`,
           '&.MuiButton-textPrimary:hover': {
-            backgroundColor: hexToRGBA(theme.palette.primary.main, 0.08)
+            backgroundColor: hexToRGBA(theme.palette.primary.main, 0.08),
           },
           '&.MuiButton-textSecondary:hover': {
-            backgroundColor: hexToRGBA(theme.palette.secondary.main, 0.08)
+            backgroundColor: hexToRGBA(theme.palette.secondary.main, 0.08),
           },
           '&.MuiButton-textSuccess:hover': {
-            backgroundColor: hexToRGBA(theme.palette.success.main, 0.08)
+            backgroundColor: hexToRGBA(theme.palette.success.main, 0.08),
           },
           '&.MuiButton-textError:hover': {
-            backgroundColor: hexToRGBA(theme.palette.error.main, 0.08)
+            backgroundColor: hexToRGBA(theme.palette.error.main, 0.08),
           },
           '&.MuiButton-textWarning:hover': {
-            backgroundColor: hexToRGBA(theme.palette.warning.main, 0.08)
+            backgroundColor: hexToRGBA(theme.palette.warning.main, 0.08),
           },
           '&.MuiButton-textInfo:hover': {
-            backgroundColor: hexToRGBA(theme.palette.info.main, 0.08)
-          }
+            backgroundColor: hexToRGBA(theme.palette.info.main, 0.08),
+          },
         }),
         contained: ({ theme }) => ({
           boxShadow: theme.shadows[3],
-          padding: `${theme.spacing(1.75, 5.5)}`
+          padding: `${theme.spacing(1.75, 5.5)}`,
         }),
         outlined: ({ theme }) => ({
           lineHeight: 1.572,
           padding: `${theme.spacing(1.75, 5.25)}`,
           '&.MuiButton-outlinedPrimary:hover': {
-            backgroundColor: hexToRGBA(theme.palette.primary.main, 0.08)
+            backgroundColor: hexToRGBA(theme.palette.primary.main, 0.08),
           },
           '&.MuiButton-outlinedSecondary:hover': {
-            backgroundColor: hexToRGBA(theme.palette.secondary.main, 0.08)
+            backgroundColor: hexToRGBA(theme.palette.secondary.main, 0.08),
           },
           '&.MuiButton-outlinedSuccess:hover': {
-            backgroundColor: hexToRGBA(theme.palette.success.main, 0.08)
+            backgroundColor: hexToRGBA(theme.palette.success.main, 0.08),
           },
           '&.MuiButton-outlinedError:hover': {
-            backgroundColor: hexToRGBA(theme.palette.error.main, 0.08)
+            backgroundColor: hexToRGBA(theme.palette.error.main, 0.08),
           },
           '&.MuiButton-outlinedWarning:hover': {
-            backgroundColor: hexToRGBA(theme.palette.warning.main, 0.08)
+            backgroundColor: hexToRGBA(theme.palette.warning.main, 0.08),
           },
           '&.MuiButton-outlinedInfo:hover': {
-            backgroundColor: hexToRGBA(theme.palette.info.main, 0.08)
-          }
+            backgroundColor: hexToRGBA(theme.palette.info.main, 0.08),
+          },
         }),
         sizeSmall: ({ theme }) => ({
           lineHeight: 1.693,
           padding: `${theme.spacing(1, 2.25)}`,
           '&.MuiButton-contained': {
-            padding: `${theme.spacing(1, 3.25)}`
+            padding: `${theme.spacing(1, 3.25)}`,
           },
           '&.MuiButton-outlined': {
             lineHeight: 1.539,
-            padding: `${theme.spacing(1, 3)}`
-          }
+            padding: `${theme.spacing(1, 3)}`,
+          },
         }),
         sizeLarge: ({ theme }) => ({
           lineHeight: 1.734,
           padding: `${theme.spacing(2, 5.5)}`,
           '&.MuiButton-contained': {
-            padding: `${theme.spacing(2, 6.5)}`
+            padding: `${theme.spacing(2, 6.5)}`,
           },
           '&.MuiButton-outlined': {
             lineHeight: 1.6,
-            padding: `${theme.spacing(2, 6.25)}`
-          }
-        })
-      }
+            padding: `${theme.spacing(2, 6.25)}`,
+          },
+        }),
+      },
     },
     MuiButtonBase: {
       defaultProps: {
-        disableRipple: themeConfig.disableRipple
-      }
+        disableRipple: themeConfig.disableRipple,
+      },
     },
 
     // ** Button Group
     MuiButtonGroup: {
       styleOverrides: {
         root: {
-          borderRadius: 8
-        }
-      }
+          borderRadius: 8,
+        },
+      },
     },
 
     // ** Card
@@ -360,28 +359,28 @@ const componentMui = (settings: ThemeSettings): ComponentsMui => {
           ...(skin === 'bordered' && { border: `1px solid ${theme.palette.divider}` }),
           '& .card-more-options': {
             marginTop: theme.spacing(-1),
-            marginRight: theme.spacing(-3)
+            marginRight: theme.spacing(-3),
           },
           '& .MuiTableContainer-root, & .MuiDataGrid-root, & .MuiDataGrid-columnHeaders': {
-            borderRadius: 0
-          }
-        })
+            borderRadius: 0,
+          },
+        }),
       },
       defaultProps: {
-        elevation: skin === 'bordered' ? 0 : 6
-      }
+        elevation: skin === 'bordered' ? 0 : 6,
+      },
     },
     MuiCardHeader: {
       styleOverrides: {
         root: ({ theme }) => ({
           padding: theme.spacing(5),
           '& + .MuiCardContent-root, & + .MuiCardActions-root, & + .MuiCollapse-root .MuiCardContent-root': {
-            paddingTop: 0
+            paddingTop: 0,
           },
           '& .MuiCardHeader-subheader': {
             fontSize: '0.875rem',
-            color: theme.palette.text.secondary
-          }
+            color: theme.palette.text.secondary,
+          },
         }),
         title: {
           lineHeight: 1.6,
@@ -389,27 +388,27 @@ const componentMui = (settings: ThemeSettings): ComponentsMui => {
           fontSize: '1.125rem',
           letterSpacing: '0.15px',
           '@media (min-width: 600px)': {
-            fontSize: '1.25rem'
-          }
+            fontSize: '1.25rem',
+          },
         },
         action: {
           marginTop: 0,
-          marginRight: 0
-        }
-      }
+          marginRight: 0,
+        },
+      },
     },
     MuiCardContent: {
       styleOverrides: {
         root: ({ theme }) => ({
           padding: theme.spacing(5),
           '& + .MuiCardHeader-root, & + .MuiCardContent-root, & + .MuiCardActions-root': {
-            paddingTop: 0
+            paddingTop: 0,
           },
           '&:last-of-type': {
-            paddingBottom: theme.spacing(5)
-          }
-        })
-      }
+            paddingBottom: theme.spacing(5),
+          },
+        }),
+      },
     },
     MuiCardActions: {
       styleOverrides: {
@@ -417,22 +416,22 @@ const componentMui = (settings: ThemeSettings): ComponentsMui => {
           padding: theme.spacing(5),
           '& .MuiButton-text': {
             paddingLeft: theme.spacing(2.5),
-            paddingRight: theme.spacing(2.5)
+            paddingRight: theme.spacing(2.5),
           },
           '&.card-action-dense': {
             padding: theme.spacing(0, 2.5, 2.5),
             '.MuiCard-root .MuiCardMedia-root + &': {
-              paddingTop: theme.spacing(2.5)
-            }
+              paddingTop: theme.spacing(2.5),
+            },
           },
           '.MuiCard-root &:first-of-type': {
             paddingTop: theme.spacing(2.5),
             '& + .MuiCardHeader-root, & + .MuiCardContent-root, & + .MuiCardActions-root': {
-              paddingTop: 0
-            }
-          }
-        })
-      }
+              paddingTop: 0,
+            },
+          },
+        }),
+      },
     },
 
     // ** Chip **// ==========><=============
@@ -440,64 +439,64 @@ const componentMui = (settings: ThemeSettings): ComponentsMui => {
       styleOverrides: {
         root: {
           '&.MuiChip-rounded': {
-            borderRadius: 4
-          }
+            borderRadius: 4,
+          },
         },
         outlined: ({ theme }) => ({
           '&.MuiChip-colorDefault': {
-            borderColor: `rgba(${theme.palette.customColors.main}, 0.22)`
-          }
+            borderColor: `rgba(${theme.palette.customColors.main}, 0.22)`,
+          },
         }),
         avatar: ({ theme }) => ({
-          color: theme.palette.text.primary
+          color: theme.palette.text.primary,
         }),
         iconColorPrimary: ({ theme }) => ({
-          color: theme.palette.text.primary
+          color: theme.palette.text.primary,
         }),
         iconColorSecondary: ({ theme }) => ({
-          color: theme.palette.secondary.main
+          color: theme.palette.secondary.main,
         }),
         deletableColorPrimary: ({ theme }) => ({
           '&.MuiChip-light .MuiChip-deleteIcon': {
             color: hexToRGBA(theme.palette.primary.main, 0.7),
             '&:hover': {
-              color: theme.palette.primary.main
-            }
-          }
+              color: theme.palette.primary.main,
+            },
+          },
         }),
         deletableColorSecondary: ({ theme }) => ({
           '&.MuiChip-light .MuiChip-deleteIcon': {
             color: hexToRGBA(theme.palette.secondary.main, 0.7),
             '&:hover': {
-              color: theme.palette.secondary.main
-            }
-          }
+              color: theme.palette.secondary.main,
+            },
+          },
         }),
         deleteIconColorPrimary: ({ theme }) => ({
           '&.MuiChip-light .MuiChip-deleteIcon': {
             color: hexToRGBA(theme.palette.success.main, 0.7),
             '&:hover': {
-              color: theme.palette.success.main
-            }
-          }
+              color: theme.palette.success.main,
+            },
+          },
         }),
         deleteIconColorSecondary: ({ theme }) => ({
           '&.MuiChip-light .MuiChip-deleteIcon': {
             color: hexToRGBA(theme.palette.error.main, 0.7),
             '&:hover': {
-              color: theme.palette.error.main
-            }
-          }
+              color: theme.palette.error.main,
+            },
+          },
         }),
         deletable: ({ theme }) => ({
           '&.MuiChip-light .MuiChip-deleteIcon': {
             color: hexToRGBA(theme.palette.warning.main, 0.7),
             '&:hover': {
-              color: theme.palette.warning.main
-            }
-          }
-        })
-      }
+              color: theme.palette.warning.main,
+            },
+          },
+        }),
+      },
     },
 
     // **  Grid
@@ -512,35 +511,35 @@ const componentMui = (settings: ThemeSettings): ComponentsMui => {
             '@media (max-width:599px)': {
               margin: theme.spacing(4),
               width: `calc(100% - ${theme.spacing(8)})`,
-              maxWidth: `calc(100% - ${theme.spacing(8)}) !important`
-            }
+              maxWidth: `calc(100% - ${theme.spacing(8)}) !important`,
+            },
           },
           '& > .MuiList-root': {
             paddingLeft: theme.spacing(1),
-            paddingRight: theme.spacing(1)
-          }
-        })
-      }
+            paddingRight: theme.spacing(1),
+          },
+        }),
+      },
     },
     MuiDialogTitle: {
       styleOverrides: {
         root: ({ theme }) => ({
-          padding: theme.spacing(5)
-        })
-      }
+          padding: theme.spacing(5),
+        }),
+      },
     },
     MuiDialogContent: {
       styleOverrides: {
         root: ({ theme }) => ({
           padding: theme.spacing(5),
           '& + .MuiDialogContent-root': {
-            paddingTop: 0
+            paddingTop: 0,
           },
           '& + .MuiDialogActions-root': {
-            paddingTop: 0
-          }
-        })
-      }
+            paddingTop: 0,
+          },
+        }),
+      },
     },
     MuiDialogActions: {
       styleOverrides: {
@@ -548,10 +547,10 @@ const componentMui = (settings: ThemeSettings): ComponentsMui => {
           padding: theme.spacing(5),
           '&.dialog-actions-dense': {
             padding: theme.spacing(2.5),
-            paddingTop: 0
-          }
-        })
-      }
+            paddingTop: 0,
+          },
+        }),
+      },
     },
 
     // ** Divider
@@ -560,54 +559,54 @@ const componentMui = (settings: ThemeSettings): ComponentsMui => {
         root: ({ theme }) => ({
           '&:not(.MuiDivider-vertical)': {
             marginTop: theme.spacing(2),
-            marginBottom: theme.spacing(2)
-          }
+            marginBottom: theme.spacing(2),
+          },
         }),
         middle: ({ theme }) => ({
           '&:not(.MuiDivider-vertical)': {
             marginLeft: theme.spacing(5),
-            marginRight: theme.spacing(5)
+            marginRight: theme.spacing(5),
           },
           '&.MuiDivider-vertical': {
             marginTop: theme.spacing(2),
-            marginBottom: theme.spacing(2)
-          }
-        })
-      }
+            marginBottom: theme.spacing(2),
+          },
+        }),
+      },
     },
 
     // ** Fab
     MuiFab: {
       styleOverrides: {
         root: ({ theme }) => ({
-          boxShadow: theme.shadows[5]
-        })
-      }
+          boxShadow: theme.shadows[5],
+        }),
+      },
     },
 
     // ** Input
     MuiInputLabel: {
       styleOverrides: {
         root: ({ theme }) => ({
-          color: theme.palette.text.secondary
-        })
-      }
+          color: theme.palette.text.secondary,
+        }),
+      },
     },
     MuiInput: {
       styleOverrides: {
         root: ({ theme }) => ({
           lineHeight: '1.5rem',
           '&:before': {
-            borderBottom: `1px solid rgba(${theme.palette.customColors.main}, 0.22)`
+            borderBottom: `1px solid rgba(${theme.palette.customColors.main}, 0.22)`,
           },
           '&:hover:not(.Mui-disabled):before': {
-            borderBottom: `1px solid rgba(${theme.palette.customColors.main}, 0.32)`
+            borderBottom: `1px solid rgba(${theme.palette.customColors.main}, 0.32)`,
           },
           '&.Mui-disabled:before': {
-            borderBottomStyle: 'solid'
-          }
-        })
-      }
+            borderBottomStyle: 'solid',
+          },
+        }),
+      },
     },
     MuiFilledInput: {
       styleOverrides: {
@@ -616,50 +615,50 @@ const componentMui = (settings: ThemeSettings): ComponentsMui => {
           borderTopRightRadius: 8,
           backgroundColor: `rgba(${theme.palette.customColors.main}, 0.05)`,
           '&:hover:not(.Mui-disabled)': {
-            backgroundColor: `rgba(${theme.palette.customColors.main}, 0.08)`
+            backgroundColor: `rgba(${theme.palette.customColors.main}, 0.08)`,
           },
           '&:before': {
-            borderBottom: `1px solid rgba(${theme.palette.customColors.main}, 0.22)`
+            borderBottom: `1px solid rgba(${theme.palette.customColors.main}, 0.22)`,
           },
           '&:hover:not(.Mui-disabled):before': {
-            borderBottom: `1px solid rgba(${theme.palette.customColors.main}, 0.32)`
+            borderBottom: `1px solid rgba(${theme.palette.customColors.main}, 0.32)`,
           },
           '&.Mui-disabled': {
             backgroundColor: `rgba(${theme.palette.customColors.main}, 0.05)`,
             '&:before': {
-              borderBottomStyle: 'solid'
-            }
-          }
-        })
-      }
+              borderBottomStyle: 'solid',
+            },
+          },
+        }),
+      },
     },
     MuiOutlinedInput: {
       styleOverrides: {
         root: ({ theme }) => ({
           borderRadius: 8,
           '&:hover:not(.Mui-focused):not(.Mui-disabled):not(.Mui-error) .MuiOutlinedInput-notchedOutline': {
-            borderColor: `rgba(${theme.palette.customColors.main}, 0.32)`
+            borderColor: `rgba(${theme.palette.customColors.main}, 0.32)`,
           },
           '&:hover.Mui-error .MuiOutlinedInput-notchedOutline': {
-            borderColor: theme.palette.error.main
+            borderColor: theme.palette.error.main,
           },
           '& .MuiOutlinedInput-notchedOutline': {
-            borderColor: `rgba(${theme.palette.customColors.main}, 0.22)`
+            borderColor: `rgba(${theme.palette.customColors.main}, 0.22)`,
           },
           '&.Mui-disabled .MuiOutlinedInput-notchedOutline': {
-            borderColor: theme.palette.text.disabled
-          }
-        })
-      }
+            borderColor: theme.palette.text.disabled,
+          },
+        }),
+      },
     },
 
     // ** Link
     MuiLink: {
       styleOverrides: {
         root: {
-          textDecorationColor: 'transparent'
-        }
-      }
+          textDecorationColor: 'transparent',
+        },
+      },
     },
 
     // ** List
@@ -668,38 +667,38 @@ const componentMui = (settings: ThemeSettings): ComponentsMui => {
         root: ({ theme }) => ({
           minWidth: 0,
           marginRight: theme.spacing(3),
-          color: theme.palette.text.secondary
-        })
-      }
+          color: theme.palette.text.secondary,
+        }),
+      },
     },
     MuiListItemAvatar: {
       styleOverrides: {
         root: ({ theme }) => ({
           minWidth: 0,
-          marginRight: theme.spacing(4)
-        })
-      }
+          marginRight: theme.spacing(4),
+        }),
+      },
     },
     MuiListItemText: {
       styleOverrides: {
         dense: ({ theme }) => ({
           '& .MuiListItemText-primary': {
-            color: theme.palette.text.primary
+            color: theme.palette.text.primary,
           },
           '& .MuiListItemText-primary, & .MuiListItemText-secondary': {
-            lineHeight: 1.43
-          }
-        })
-      }
+            lineHeight: 1.43,
+          },
+        }),
+      },
     },
     MuiListSubheader: {
       styleOverrides: {
         root: ({ theme }) => ({
           fontWeight: 600,
           textTransform: 'uppercase',
-          color: theme.palette.text.primary
-        })
-      }
+          color: theme.palette.text.primary,
+        }),
+      },
     },
 
     // ** Menu
@@ -714,47 +713,47 @@ const componentMui = (settings: ThemeSettings): ComponentsMui => {
                 : theme.palette.mode === 'light'
                   ? theme.shadows[8]
                   : theme.shadows[9],
-            ...(skin === 'bordered' && { border: `1px solid ${theme.palette.divider}` })
-          }
-        })
-      }
+            ...(skin === 'bordered' && { border: `1px solid ${theme.palette.divider}` }),
+          },
+        }),
+      },
     },
 
     // ** Pagination
     MuiPaginationItem: {
       styleOverrides: {
         outlined: ({ theme }) => ({
-          borderColor: `rgba(${theme.palette.customColors.main}, 0.22)`
+          borderColor: `rgba(${theme.palette.customColors.main}, 0.22)`,
         }),
         outlinedPrimary: ({ theme }) => ({
           '&.Mui-selected': {
             backgroundColor: hexToRGBA(theme.palette.primary.main, 0.12),
             '&:hover': {
-              backgroundColor: `${hexToRGBA(theme.palette.primary.main, 0.24)} !important`
-            }
-          }
+              backgroundColor: `${hexToRGBA(theme.palette.primary.main, 0.24)} !important`,
+            },
+          },
         }),
         outlinedSecondary: ({ theme }) => ({
           '&.Mui-selected': {
             backgroundColor: hexToRGBA(theme.palette.secondary.main, 0.12),
             '&:hover': {
-              backgroundColor: `${hexToRGBA(theme.palette.secondary.main, 0.24)} !important`
-            }
-          }
+              backgroundColor: `${hexToRGBA(theme.palette.secondary.main, 0.24)} !important`,
+            },
+          },
         }),
         rounded: {
-          borderRadius: 8
-        }
-      }
+          borderRadius: 8,
+        },
+      },
     },
 
     // ** Page
     MuiPaper: {
       styleOverrides: {
         root: {
-          backgroundImage: 'none'
-        }
-      }
+          backgroundImage: 'none',
+        },
+      },
     },
 
     // ** Popover
@@ -763,10 +762,10 @@ const componentMui = (settings: ThemeSettings): ComponentsMui => {
         root: ({ theme }) => ({
           '& .MuiPopover-paper': {
             boxShadow: theme.shadows[skin === 'bordered' ? 0 : 6],
-            ...(skin === 'bordered' && { border: `1px solid ${theme.palette.divider}` })
-          }
-        })
-      }
+            ...(skin === 'bordered' && { border: `1px solid ${theme.palette.divider}` }),
+          },
+        }),
+      },
     },
 
     // ** Progress
@@ -776,28 +775,28 @@ const componentMui = (settings: ThemeSettings): ComponentsMui => {
           height: 6,
           borderRadius: theme.shape.borderRadius,
           '&.MuiLinearProgress-colorPrimary': {
-            backgroundColor: hexToRGBA(theme.palette.primary.main, 0.12)
+            backgroundColor: hexToRGBA(theme.palette.primary.main, 0.12),
           },
           '&.MuiLinearProgress-colorSecondary': {
-            backgroundColor: hexToRGBA(theme.palette.secondary.main, 0.12)
+            backgroundColor: hexToRGBA(theme.palette.secondary.main, 0.12),
           },
           '&.MuiLinearProgress-colorSuccess': {
-            backgroundColor: hexToRGBA(theme.palette.success.main, 0.12)
+            backgroundColor: hexToRGBA(theme.palette.success.main, 0.12),
           },
           '&.MuiLinearProgress-colorError': {
-            backgroundColor: hexToRGBA(theme.palette.error.main, 0.12)
+            backgroundColor: hexToRGBA(theme.palette.error.main, 0.12),
           },
           '&.MuiLinearProgress-colorWarning': {
-            backgroundColor: hexToRGBA(theme.palette.warning.main, 0.12)
+            backgroundColor: hexToRGBA(theme.palette.warning.main, 0.12),
           },
           '&.MuiLinearProgress-colorInfo': {
-            backgroundColor: hexToRGBA(theme.palette.info.main, 0.12)
-          }
+            backgroundColor: hexToRGBA(theme.palette.info.main, 0.12),
+          },
         }),
         bar: ({ theme }) => ({
-          borderRadius: theme.shape.borderRadius
-        })
-      }
+          borderRadius: theme.shape.borderRadius,
+        }),
+      },
     },
 
     // ** Rating
@@ -806,13 +805,13 @@ const componentMui = (settings: ThemeSettings): ComponentsMui => {
         root: ({ theme }) => ({
           color: theme.palette.warning.main,
           '& svg': {
-            flexShrink: 0
-          }
+            flexShrink: 0,
+          },
         }),
         iconEmpty: ({ theme }) => ({
-          color: `rgba(${theme.palette.customColors.main}, 0.22)`
-        })
-      }
+          color: `rgba(${theme.palette.customColors.main}, 0.22)`,
+        }),
+      },
     },
 
     // ** Select
@@ -821,13 +820,13 @@ const componentMui = (settings: ThemeSettings): ComponentsMui => {
         select: ({ theme }) => ({
           minWidth: '6rem !important',
           '&.MuiTablePagination-select': {
-            minWidth: '1.5rem !important'
+            minWidth: '1.5rem !important',
           },
           '&.Mui-disabled ~ .MuiOutlinedInput-notchedOutline': {
-            borderColor: `rgba(${theme.palette.customColors.main}, 0.22)`
-          }
-        })
-      }
+            borderColor: `rgba(${theme.palette.customColors.main}, 0.22)`,
+          },
+        }),
+      },
     },
 
     // ** Snackbar
@@ -839,10 +838,10 @@ const componentMui = (settings: ThemeSettings): ComponentsMui => {
           ...(skin === 'bordered' && { boxShadow: 'none' }),
           backgroundColor: theme.palette.mode === 'light' ? theme.palette.grey[900] : theme.palette.grey[100],
           '& .MuiSnackbarContent-message': {
-            lineHeight: 1.429
-          }
-        })
-      }
+            lineHeight: 1.429,
+          },
+        }),
+      },
     },
 
     // ** Switch
@@ -850,21 +849,21 @@ const componentMui = (settings: ThemeSettings): ComponentsMui => {
       styleOverrides: {
         root: ({ theme }) => ({
           '& .MuiSwitch-track': {
-            borderRadius: theme.shape.borderRadius
+            borderRadius: theme.shape.borderRadius,
           },
 
           '& .MuiSwitch-switchBase': {
             '&:not(.Mui-checked)': {
               '& .MuiSwitch-thumb': {
-                color: theme.palette.grey[50]
-              }
-            }
+                color: theme.palette.grey[50],
+              },
+            },
           },
           '& .Mui-disabled + .MuiSwitch-track': {
-            backgroundColor: `rgb(${theme.palette.customColors.main})`
-          }
-        })
-      }
+            backgroundColor: `rgb(${theme.palette.customColors.main})`,
+          },
+        }),
+      },
     },
 
     // ** Table
@@ -872,9 +871,9 @@ const componentMui = (settings: ThemeSettings): ComponentsMui => {
       styleOverrides: {
         root: ({ theme }) => ({
           boxShadow: theme.shadows[0],
-          borderTopColor: theme.palette.divider
-        })
-      }
+          borderTopColor: theme.palette.divider,
+        }),
+      },
     },
     MuiTableHead: {
       styleOverrides: {
@@ -884,10 +883,10 @@ const componentMui = (settings: ThemeSettings): ComponentsMui => {
             fontWeight: 500,
             fontSize: '0.75rem',
             lineHeight: '1.959rem',
-            letterSpacing: '0.17px'
-          }
-        }
-      }
+            letterSpacing: '0.17px',
+          },
+        },
+      },
     },
     MuiTableBody: {
       styleOverrides: {
@@ -899,49 +898,49 @@ const componentMui = (settings: ThemeSettings): ComponentsMui => {
             letterSpacing: '0.15px',
             '&:not(.MuiTableCell-sizeSmall):not(.MuiTableCell-paddingCheckbox):not(.MuiTableCell-paddingNone)': {
               paddingTop: theme.spacing(4),
-              paddingBottom: theme.spacing(4)
-            }
-          }
-        })
-      }
+              paddingBottom: theme.spacing(4),
+            },
+          },
+        }),
+      },
     },
     MuiTableRow: {
       styleOverrides: {
         root: ({ theme }) => ({
           '& .MuiTableCell-head:not(.MuiTableCell-paddingCheckbox):first-of-type, & .MuiTableCell-root:not(.MuiTableCell-paddingCheckbox):first-of-type ':
             {
-              paddingLeft: theme.spacing(5)
+              paddingLeft: theme.spacing(5),
             },
           '& .MuiTableCell-head:last-child, & .MuiTableCell-root:last-child': {
-            paddingRight: theme.spacing(5)
-          }
-        })
-      }
+            paddingRight: theme.spacing(5),
+          },
+        }),
+      },
     },
     MuiTableCell: {
       styleOverrides: {
         root: ({ theme }) => ({
-          borderBottom: `1px solid ${theme.palette.divider}`
+          borderBottom: `1px solid ${theme.palette.divider}`,
         }),
         paddingCheckbox: ({ theme }) => ({
-          paddingLeft: theme.spacing(2)
+          paddingLeft: theme.spacing(2),
         }),
         stickyHeader: ({ theme }) => ({
-          backgroundColor: theme.palette.customColors.tableHeaderBg
-        })
-      }
+          backgroundColor: theme.palette.customColors.tableHeaderBg,
+        }),
+      },
     },
     MuiTablePagination: {
       styleOverrides: {
         root: ({ theme }) => ({
           '& .MuiIconButton-root.Mui-disabled': {
-            color: theme.palette.action.active
-          }
+            color: theme.palette.action.active,
+          },
         }),
         displayedRows: ({ theme }) => ({
-          color: theme.palette.text.primary
-        })
-      }
+          color: theme.palette.text.primary,
+        }),
+      },
     },
 
     // ** Tabs
@@ -952,22 +951,22 @@ const componentMui = (settings: ThemeSettings): ComponentsMui => {
           marginRight: theme.spacing(4),
           borderRight: `1px solid ${theme.palette.divider}`,
           '& .MuiTab-root': {
-            minWidth: 130
-          }
-        })
-      }
+            minWidth: 130,
+          },
+        }),
+      },
     },
     MuiTab: {
       styleOverrides: {
         root: {
-          lineHeight: 1.5
+          lineHeight: 1.5,
         },
         textColorSecondary: ({ theme }) => ({
           '&.Mui-selected': {
-            color: theme.palette.text.secondary
-          }
-        })
-      }
+            color: theme.palette.text.secondary,
+          },
+        }),
+      },
     },
 
     // ** Timeline
@@ -1048,16 +1047,16 @@ const componentMui = (settings: ThemeSettings): ComponentsMui => {
     MuiToggleButtonGroup: {
       styleOverrides: {
         root: {
-          borderRadius: 8
-        }
-      }
+          borderRadius: 8,
+        },
+      },
     },
     MuiToggleButton: {
       styleOverrides: {
         root: {
-          borderRadius: 8
-        }
-      }
+          borderRadius: 8,
+        },
+      },
     },
 
     // ** Tooltip
@@ -1066,23 +1065,23 @@ const componentMui = (settings: ThemeSettings): ComponentsMui => {
         tooltip: ({ theme }) => ({
           borderRadius: 6,
           lineHeight: 1.455,
-          backgroundColor: hexToRGBA(theme.palette.customColors.tooltipBg, 0.9)
+          backgroundColor: hexToRGBA(theme.palette.customColors.tooltipBg, 0.9),
         }),
         arrow: ({ theme }) => ({
-          color: hexToRGBA(theme.palette.customColors.tooltipBg, 0.9)
-        })
-      }
+          color: hexToRGBA(theme.palette.customColors.tooltipBg, 0.9),
+        }),
+      },
     },
 
     // ** Typography
     MuiTypography: {
       styleOverrides: {
         gutterBottom: ({ theme }) => ({
-          marginBottom: theme.spacing(2)
-        })
-      }
-    }
-  }
-}
+          marginBottom: theme.spacing(2),
+        }),
+      },
+    },
+  };
+};
 
-export default componentMui
+export default componentMui;

@@ -1,21 +1,21 @@
 // ** MUI Imports
-import { styled, useTheme } from '@mui/material/styles'
-import useScrollTrigger from '@mui/material/useScrollTrigger'
-import MuiAppBar, { AppBarProps } from '@mui/material/AppBar'
-import MuiToolbar, { ToolbarProps } from '@mui/material/Toolbar'
+import { styled, useTheme } from '@mui/material/styles';
+import useScrollTrigger from '@mui/material/useScrollTrigger';
+import MuiAppBar, { AppBarProps } from '@mui/material/AppBar';
+import MuiToolbar, { ToolbarProps } from '@mui/material/Toolbar';
 
 // ** Type Import
-import { LayoutProps } from '@/@core/types/mui/type'
+import { LayoutProps } from '@/@core/types/mui/type';
 
 // ** Util Import
-import { hexToRGBA } from '@/@core/utils/hex-to-rgba'
-import AppBarContent from './AppBarContent'
+import { hexToRGBA } from '@/@core/utils/hex-to-rgba';
+import AppBarContent from './AppBarContent';
 
 interface Props {
-  hidden: LayoutProps['hidden']
-  toggleNavVisibility: () => void
-  settings: LayoutProps['settings']
-  saveSettings: LayoutProps['saveSettings']
+  hidden: LayoutProps['hidden'];
+  toggleNavVisibility: () => void;
+  settings: LayoutProps['settings'];
+  saveSettings: LayoutProps['saveSettings'];
 }
 
 const AppBar = styled(MuiAppBar)<AppBarProps>(({ theme }) => ({
@@ -28,9 +28,9 @@ const AppBar = styled(MuiAppBar)<AppBarProps>(({ theme }) => ({
   minHeight: theme.mixins.toolbar.minHeight,
   [theme.breakpoints.down('sm')]: {
     paddingLeft: theme.spacing(4),
-    paddingRight: theme.spacing(4)
-  }
-}))
+    paddingRight: theme.spacing(4),
+  },
+}));
 
 const Toolbar = styled(MuiToolbar)<ToolbarProps>(({ theme }) => ({
   width: '100%',
@@ -38,19 +38,19 @@ const Toolbar = styled(MuiToolbar)<ToolbarProps>(({ theme }) => ({
   borderBottomLeftRadius: theme.shape.borderRadius,
   borderBottomRightRadius: theme.shape.borderRadius,
   minHeight: `${theme.mixins.toolbar.minHeight}px !important`,
-  transition: 'padding .25s ease-in-out, box-shadow .25s ease-in-out, backdrop-filter .25s ease-in-out'
-}))
+  transition: 'padding .25s ease-in-out, box-shadow .25s ease-in-out, backdrop-filter .25s ease-in-out',
+}));
 
 const LayoutAppBar = (props: Props) => {
   // ** Props
-  const { settings } = props
+  const { settings } = props;
 
   // ** Hooks
-  const theme = useTheme()
-  const scrollTrigger = useScrollTrigger({ threshold: 0, disableHysteresis: true })
+  const theme = useTheme();
+  const scrollTrigger = useScrollTrigger({ threshold: 0, disableHysteresis: true });
 
   // ** Vars
-  const { skin, appBar, appBarBlur, contentWidth } = settings
+  const { skin, appBar, appBarBlur, contentWidth } = settings;
 
   const appBarFixedStyles = () => {
     return {
@@ -58,12 +58,12 @@ const LayoutAppBar = (props: Props) => {
       boxShadow: skin === 'bordered' ? 0 : 3,
       ...(appBarBlur && { backdropFilter: 'blur(8px)' }),
       backgroundColor: hexToRGBA(theme.palette.background.paper, appBarBlur ? 0.9 : 1),
-      ...(skin === 'bordered' && { border: `1px solid ${theme.palette.divider}`, borderTopWidth: 0 })
-    }
-  }
+      ...(skin === 'bordered' && { border: `1px solid ${theme.palette.divider}`, borderTopWidth: 0 }),
+    };
+  };
 
   if (appBar === 'hidden') {
-    return null
+    return null;
   }
 
   return (
@@ -73,14 +73,14 @@ const LayoutAppBar = (props: Props) => {
         sx={{
           ...(appBar === 'fixed' && scrollTrigger && { ...appBarFixedStyles() }),
           ...(contentWidth === 'boxed' && {
-            '@media (min-width:1440px)': { maxWidth: `calc(1440px - ${theme.spacing(6)} * 2)` }
-          })
+            '@media (min-width:1440px)': { maxWidth: `calc(1440px - ${theme.spacing(6)} * 2)` },
+          }),
         }}
       >
         <AppBarContent {...props} />
       </Toolbar>
     </AppBar>
-  )
-}
+  );
+};
 
-export default LayoutAppBar
+export default LayoutAppBar;
