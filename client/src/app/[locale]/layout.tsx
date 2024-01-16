@@ -11,7 +11,6 @@ import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter'
 import { NextAppDirEmotionCacheProvider } from 'tss-react/next/appDir'
 // ** Fake-DB Import
 
-import '@/@fake-db'
 // Can be imported from a shared config
 const locales = ['en', 'fr']
 
