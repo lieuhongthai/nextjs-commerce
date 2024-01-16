@@ -453,11 +453,17 @@ const AutocompleteComponent = ({ hidden, settings }: Props) => {
     return null;
   } else {
     return (
-      <Box ref={wrapper} onClick={() => !openDialog && setOpenDialog(true)} sx={{ display: 'flex', cursor: 'pointer', alignItems: 'center' }}>
+      <Box
+        ref={wrapper}
+        onClick={() => !openDialog && setOpenDialog(true)}
+        sx={{ display: 'flex', cursor: 'pointer', alignItems: 'center' }}
+      >
         <IconButton color='inherit' sx={!hidden && layout === 'vertical' ? { mr: 1, ml: -2.75 } : {}}>
           <Icon icon='mdi:magnify' />
         </IconButton>
-        {!hidden && layout === 'vertical' ? <Typography sx={{ userSelect: 'none', color: 'text.disabled' }}>Search (Ctrl+/)</Typography> : null}
+        {!hidden && layout === 'vertical' ? (
+          <Typography sx={{ userSelect: 'none', color: 'text.disabled' }}>Search (Ctrl+/)</Typography>
+        ) : null}
         {openDialog && (
           <Dialog fullWidth open={openDialog} fullScreen={fullScreenDialog} onClose={() => setOpenDialog(false)}>
             <Box sx={{ top: 0, width: '100%', position: 'sticky' }}>
@@ -471,7 +477,9 @@ const AutocompleteComponent = ({ hidden, settings }: Props) => {
                 onChange={(event, obj) => handleOptionClick(obj as AppBarSearchType)}
                 noOptionsText={<NoResult value={searchValue} setOpenDialog={setOpenDialog} />}
                 getOptionLabel={(option: AppBarSearchType | unknown) => (option as AppBarSearchType).title}
-                groupBy={(option: AppBarSearchType | unknown) => (searchValue.length ? categoryTitle[(option as AppBarSearchType).category] : '')}
+                groupBy={(option: AppBarSearchType | unknown) =>
+                  searchValue.length ? categoryTitle[(option as AppBarSearchType).category] : ''
+                }
                 sx={{
                   '& + .MuiAutocomplete-popper': {
                     ...(searchValue.length

@@ -38,7 +38,18 @@ const SwipeableDrawer = styled(MuiSwipeableDrawer)<SwipeableDrawerProps>({
 
 const Drawer = (props: Props) => {
   // ** Props
-  const { hidden, children, navHover, navWidth, settings, navVisible, setNavHover, setNavVisible, collapsedNavWidth, navigationBorderWidth } = props;
+  const {
+    hidden,
+    children,
+    navHover,
+    navWidth,
+    settings,
+    navVisible,
+    setNavHover,
+    setNavVisible,
+    collapsedNavWidth,
+    navigationBorderWidth,
+  } = props;
 
   // ** Hook
   const theme = useTheme();

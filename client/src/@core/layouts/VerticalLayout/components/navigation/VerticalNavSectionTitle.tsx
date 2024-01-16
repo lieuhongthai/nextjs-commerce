@@ -19,16 +19,18 @@ interface Props {
 }
 
 // ** Styled Components
-const ListSubheader = styled((props: ListSubheaderProps) => <MuiListSubheader component='li' {...props} />)(({ theme }) => ({
-  lineHeight: 1,
-  display: 'flex',
-  position: 'static',
-  padding: theme.spacing(3),
-  marginTop: theme.spacing(6.25),
-  backgroundColor: 'transparent',
-  color: theme.palette.text.disabled,
-  transition: 'padding-left .25s ease-in-out',
-}));
+const ListSubheader = styled((props: ListSubheaderProps) => <MuiListSubheader component='li' {...props} />)(
+  ({ theme }) => ({
+    lineHeight: 1,
+    display: 'flex',
+    position: 'static',
+    padding: theme.spacing(3),
+    marginTop: theme.spacing(6.25),
+    backgroundColor: 'transparent',
+    color: theme.palette.text.disabled,
+    transition: 'padding-left .25s ease-in-out',
+  }),
+);
 
 const VerticalNavSectionTitle = (props: Props) => {
   // ** Props
@@ -67,7 +69,9 @@ const VerticalNavSectionTitle = (props: Props) => {
       <ListSubheader
         className='nav-section-title'
         sx={{
-          ...(navCollapsed && !navHover ? { py: 4.75, px: (collapsedNavWidth - navigationBorderWidth - 22) / 8 } : { pl: 0 }),
+          ...(navCollapsed && !navHover
+            ? { py: 4.75, px: (collapsedNavWidth - navigationBorderWidth - 22) / 8 }
+            : { pl: 0 }),
         }}
       >
         <Divider

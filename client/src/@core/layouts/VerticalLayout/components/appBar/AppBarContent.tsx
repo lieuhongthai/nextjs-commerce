@@ -11,7 +11,9 @@ import Icon from 'src/@core/components/icon';
 import ModeToggler from 'src/@core/layouts/components/shared-components/ModeToggler';
 import UserDropdown from 'src/@core/layouts/components/shared-components/UserDropdown';
 import LanguageDropdown from 'src/@core/layouts/components/shared-components/LanguageDropdown';
-import NotificationDropdown, { NotificationsType } from 'src/@core/layouts/components/shared-components/NotificationDropdown';
+import NotificationDropdown, {
+  NotificationsType,
+} from 'src/@core/layouts/components/shared-components/NotificationDropdown';
 import ShortcutsDropdown, { ShortcutsType } from 'src/@core/layouts/components/shared-components/ShortcutsDropdown';
 import { Settings } from '@/@core/types/mui/type';
 import Autocomplete from './Autocomplete';

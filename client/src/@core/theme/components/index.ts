@@ -238,7 +238,10 @@ const componentMui = (settings: Settings): ComponentsMui => {
     MuiBackdrop: {
       styleOverrides: {
         root: ({ theme }) => ({
-          backgroundColor: theme.palette.mode === 'light' ? `rgba(${theme.palette.customColors.main}, 0.5)` : hexToRGBA('#101121', 0.87),
+          backgroundColor:
+            theme.palette.mode === 'light'
+              ? `rgba(${theme.palette.customColors.main}, 0.5)`
+              : hexToRGBA('#101121', 0.87),
         }),
         invisible: {
           backgroundColor: 'transparent',
@@ -704,7 +707,12 @@ const componentMui = (settings: Settings): ComponentsMui => {
         root: ({ theme }) => ({
           '& .MuiMenu-paper': {
             borderRadius: 5,
-            boxShadow: skin === 'bordered' ? theme.shadows[0] : theme.palette.mode === 'light' ? theme.shadows[8] : theme.shadows[9],
+            boxShadow:
+              skin === 'bordered'
+                ? theme.shadows[0]
+                : theme.palette.mode === 'light'
+                  ? theme.shadows[8]
+                  : theme.shadows[9],
             ...(skin === 'bordered' && { border: `1px solid ${theme.palette.divider}` }),
           },
         }),

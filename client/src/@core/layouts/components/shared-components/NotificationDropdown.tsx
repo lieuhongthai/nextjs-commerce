@@ -167,7 +167,11 @@ const NotificationDropdown = (props: Props) => {
           variant='dot'
           invisible={!notifications.length}
           sx={{
-            '& .MuiBadge-badge': { top: 4, right: 4, boxShadow: theme => `0 0 0 2px ${theme.palette.background.paper}` },
+            '& .MuiBadge-badge': {
+              top: 4,
+              right: 4,
+              boxShadow: theme => `0 0 0 2px ${theme.palette.background.paper}`,
+            },
           }}
         >
           <Icon icon='mdi:bell-outline' />
@@ -180,7 +184,11 @@ const NotificationDropdown = (props: Props) => {
         anchorOrigin={{ vertical: 'bottom', horizontal: direction === 'ltr' ? 'right' : 'left' }}
         transformOrigin={{ vertical: 'top', horizontal: direction === 'ltr' ? 'right' : 'left' }}
       >
-        <MenuItem disableRipple disableTouchRipple sx={{ cursor: 'default', userSelect: 'auto', backgroundColor: 'transparent !important' }}>
+        <MenuItem
+          disableRipple
+          disableTouchRipple
+          sx={{ cursor: 'default', userSelect: 'auto', backgroundColor: 'transparent !important' }}
+        >
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
             <Typography sx={{ cursor: 'text', fontWeight: 600 }}>Notifications</Typography>
             <CustomChip

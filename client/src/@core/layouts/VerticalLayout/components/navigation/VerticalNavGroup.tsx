@@ -232,7 +232,10 @@ const VerticalNavGroup = (props: Props) => {
             mt: 1.5,
             flexDirection: 'column',
             transition: 'padding .25s ease-in-out',
-            px: parent && item.children ? '0 !important' : `${theme.spacing(navCollapsed && !navHover ? 2 : 3)} !important`,
+            px:
+              parent && item.children
+                ? '0 !important'
+                : `${theme.spacing(navCollapsed && !navHover ? 2 : 3)} !important`,
           }}
         >
           <ListItemButton

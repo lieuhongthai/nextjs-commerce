@@ -9,17 +9,17 @@ import { Theme, styled } from '@mui/material/styles';
 import Box, { BoxProps } from '@mui/material/Box';
 
 // ** Icon Imports
-import Icon from 'src/@core/components/icon';
+import Icon from '@/@core/components/icon';
 
 // ** Theme Config Import
-import themeConfig from 'src/configs/themeConfig';
+import themeConfig from '@/configs/themeConfig';
 
 // ** Type Import
 
 // ** Components
 import AppBar from './components/appBar';
 import Navigation from './components/navigation';
-import ScrollToTop from 'src/@core/components/scroll-to-top';
+import ScrollToTop from '@/@core/components/scroll-to-top';
 import { LayoutProps } from '@/@core/types/mui/type';
 import Footer from './components/footer';
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -80,7 +80,10 @@ const VerticalLayout = (props: LayoutProps) => {
           navigationBorderWidth={navigationBorderWidth}
           {...props}
         />
-        <MainContentWrapper className='layout-content-wrapper' sx={{ ...(contentHeightFixed && { maxHeight: '100vh' }) }}>
+        <MainContentWrapper
+          className='layout-content-wrapper'
+          sx={{ ...(contentHeightFixed && { maxHeight: '100vh' }) }}
+        >
           {/* AppBar Component */}
           <AppBar toggleNavVisibility={toggleNavVisibility} {...props} />
 

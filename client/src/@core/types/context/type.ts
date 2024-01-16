@@ -1,5 +1,14 @@
 import { ReactNode } from 'react';
-import { AppBar, ContentWidth, Footer, Mode, Settings, Skin, ThemeColor, VerticalNavToggle } from '@/@core/types/mui/type';
+import {
+  AppBar,
+  ContentWidth,
+  Footer,
+  Mode,
+  Settings,
+  Skin,
+  ThemeColor,
+  VerticalNavToggle,
+} from '@/@core/types/mui/type';
 import { Direction } from '@mui/material';
 
 export type SettingsContextValue = {

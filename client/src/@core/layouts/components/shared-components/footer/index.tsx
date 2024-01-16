@@ -61,7 +61,9 @@ const Footer = (props: Props) => {
                     '@media (min-width:1440px)': { maxWidth: `calc(1440px - ${theme.spacing(6)} * 2)` },
                   }),
                 ...(layout === 'vertical' && {
-                  ...(skin === 'bordered' ? { border: `1px solid ${theme.palette.divider}`, borderBottomWidth: 0 } : { boxShadow: 6 }),
+                  ...(skin === 'bordered'
+                    ? { border: `1px solid ${theme.palette.divider}`, borderBottomWidth: 0 }
+                    : { boxShadow: 6 }),
                 }),
               }
             : { px: [4, 6] }),

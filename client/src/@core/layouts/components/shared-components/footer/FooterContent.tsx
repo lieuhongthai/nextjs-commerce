@@ -29,7 +29,10 @@ const FooterContent = () => {
           <Link target='_blank' href='https://1.envato.market/pixinvent_portfolio'>
             More Themes
           </Link>
-          <Link target='_blank' href='https://pixinvent.com/demo/materialize-mui-react-nextjs-admin-template/documentation'>
+          <Link
+            target='_blank'
+            href='https://pixinvent.com/demo/materialize-mui-react-nextjs-admin-template/documentation'
+          >
             Documentation
           </Link>
           <Link target='_blank' href='https://pixinvent.ticksy.com/'>

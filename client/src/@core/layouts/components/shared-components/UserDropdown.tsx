@@ -85,7 +85,12 @@ const UserDropdown = () => {
           horizontal: 'right',
         }}
       >
-        <Avatar alt='John Doe' onClick={handleDropdownOpen} sx={{ width: 40, height: 40 }} src='/images/avatars/1.png' />
+        <Avatar
+          alt='John Doe'
+          onClick={handleDropdownOpen}
+          sx={{ width: 40, height: 40 }}
+          src='/images/avatars/1.png'
+        />
       </Badge>
       <Menu
         anchorEl={anchorEl}
@@ -154,7 +159,10 @@ const UserDropdown = () => {
           </Box>
         </MenuItem>
         <Divider />
-        <MenuItem onClick={handleLogout} sx={{ py: 2, '& svg': { mr: 2, fontSize: '1.375rem', color: 'text.primary' } }}>
+        <MenuItem
+          onClick={handleLogout}
+          sx={{ py: 2, '& svg': { mr: 2, fontSize: '1.375rem', color: 'text.primary' } }}
+        >
           <Icon icon='mdi:logout-variant' />
           Logout
         </MenuItem>

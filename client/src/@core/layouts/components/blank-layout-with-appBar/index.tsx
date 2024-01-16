@@ -84,11 +84,25 @@ const BlankLayoutAppBar = () => {
               transform='matrix(0.865206 0.501417 -0.498585 0.866841 71.7728 0)'
             />
             <defs>
-              <linearGradient y1='0' x1='25.1443' x2='25.1443' y2='143.953' id='paint0_linear_7821_79167' gradientUnits='userSpaceOnUse'>
+              <linearGradient
+                y1='0'
+                x1='25.1443'
+                x2='25.1443'
+                y2='143.953'
+                id='paint0_linear_7821_79167'
+                gradientUnits='userSpaceOnUse'
+              >
                 <stop />
                 <stop offset='1' stopOpacity='0' />
               </linearGradient>
-              <linearGradient y1='0' x1='25.1443' x2='25.1443' y2='143.953' id='paint1_linear_7821_79167' gradientUnits='userSpaceOnUse'>
+              <linearGradient
+                y1='0'
+                x1='25.1443'
+                x2='25.1443'
+                y2='143.953'
+                id='paint1_linear_7821_79167'
+                gradientUnits='userSpaceOnUse'
+              >
                 <stop />
                 <stop offset='1' stopOpacity='0' />
               </linearGradient>

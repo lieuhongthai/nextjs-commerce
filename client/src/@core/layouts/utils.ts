@@ -42,7 +42,12 @@ export const hasActiveChild = (item: NavGroup, currentURL: string): boolean => {
     const childPath = (child as NavLink).path;
 
     // Check if the child has a link and is active
-    if (child && childPath && currentURL && (childPath === currentURL || (currentURL.includes(childPath) && childPath !== '/'))) {
+    if (
+      child &&
+      childPath &&
+      currentURL &&
+      (childPath === currentURL || (currentURL.includes(childPath) && childPath !== '/'))
+    ) {
       return true;
     }
   }

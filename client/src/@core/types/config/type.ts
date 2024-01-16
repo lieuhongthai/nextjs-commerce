@@ -1,5 +1,13 @@
 import { Direction } from '@mui/material/styles';
-import { Skin, Mode, Footer, ContentWidth, VerticalNavToggle, HorizontalMenuToggle, AppBar } from '@/@core/types/mui/type';
+import {
+  Skin,
+  Mode,
+  Footer,
+  ContentWidth,
+  VerticalNavToggle,
+  HorizontalMenuToggle,
+  AppBar,
+} from '@/@core/types/mui/type';
 
 export type ThemeConfig = {
   skin: Skin;

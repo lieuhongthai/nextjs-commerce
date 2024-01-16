@@ -1,5 +1,14 @@
 import { Direction } from '@mui/material/styles';
-import { AppBar, ContentWidth, Footer, Mode, Skin, ThemeColor, VerticalNavItemsType, VerticalNavToggle } from '../mui/type';
+import {
+  AppBar,
+  ContentWidth,
+  Footer,
+  Mode,
+  Skin,
+  ThemeColor,
+  VerticalNavItemsType,
+  VerticalNavToggle,
+} from '../mui/type';
 import { ReactNode } from 'react';
 import { SwipeableDrawerProps } from '@mui/material/SwipeableDrawer';
 import { AppBarProps } from '@mui/material';
