@@ -27,15 +27,15 @@ export function middleware(request: NextRequest) {
 
   // `/_next/` and `/api/` are ignored by the watcher, but we need to ignore files in `public` manually.
   // If you have one
-  if (
-    [
-      '/manifest.json',
-      '/favicon.ico',
-      '/images/avatars/1.png',
-      // Your other files in `public`
-    ].includes(pathname)
-  )
-    return;
+  // if (
+  //   [
+  //     '/manifest.json',
+  //     '/favicon.ico',
+  //     '/images/avatars/1.png',
+  //     // Your other files in `public`
+  //   ].includes(pathname)
+  // )
+  //   return;
 
   // Check if there is any supported locale in the pathname
   const pathnameIsMissingLocale = i18n.locales.every(
@@ -54,7 +54,7 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   // Matcher ignoring `/_next/` and `/api/`
-  matcher: ['/((?!api|_next/static|_next/image|/images|favicon.ico).*)'],
+  matcher: ['/((?!api|_next/static|_next/image|asset|favicon.ico|images/*).*)'],
 };
 
 // export const config = {
