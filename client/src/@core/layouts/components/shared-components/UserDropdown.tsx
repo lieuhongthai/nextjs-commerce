@@ -17,7 +17,6 @@ import Typography from '@mui/material/Typography';
 // ** Icon Imports
 import Icon from '@/@core/components/icon';
 import themeConfig from '@/configs/themeConfig';
-import Image from 'next/image';
 
 // ** Type Imports
 
@@ -36,8 +35,6 @@ const UserDropdown = () => {
 
   // ** Hooks
   const router = useRouter();
-
-  //   const { logout } = useAuth();
 
   // ** Vars
   const { direction } = themeConfig;
@@ -89,7 +86,7 @@ const UserDropdown = () => {
           alt='John Doe'
           onClick={handleDropdownOpen}
           sx={{ width: 40, height: 40 }}
-          src='../../../../../public/1.png'
+          src='/images/avatars/1.png'
         />
         {/* <Image alt='John Doe' onClick={handleDropdownOpen} width={40} height={40} src='../../../../../public/1.png' /> */}
       </Badge>
