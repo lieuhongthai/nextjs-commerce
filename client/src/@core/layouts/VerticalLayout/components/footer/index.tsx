@@ -10,7 +10,6 @@ import FooterContent from './FooterContent';
 
 interface Props {
   settings: LayoutProps['settings'];
-  saveSettings: LayoutProps['saveSettings'];
   footerStyles?: NonNullable<LayoutProps['footerProps']>['sx'];
   footerContent?: NonNullable<LayoutProps['footerProps']>['content'];
 }

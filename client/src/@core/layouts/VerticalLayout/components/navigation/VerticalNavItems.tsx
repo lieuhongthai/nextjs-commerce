@@ -15,7 +15,6 @@ interface Props {
   currentActiveGroup: string[];
   navigationBorderWidth: number;
   settings: LayoutProps['settings'];
-  saveSettings: LayoutProps['saveSettings'];
   setGroupActive: (value: string[]) => void;
   setCurrentActiveGroup: (item: string[]) => void;
   verticalNavItems?: any;

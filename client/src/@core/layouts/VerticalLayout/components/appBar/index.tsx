@@ -12,10 +12,9 @@ import { hexToRGBA } from '@/@core/utils/hex-to-rgba';
 import AppBarContent from './AppBarContent';
 
 interface Props {
-  hidden: LayoutProps['hidden'];
+  hidden: boolean;
   toggleNavVisibility: () => void;
   settings: LayoutProps['settings'];
-  saveSettings: LayoutProps['saveSettings'];
 }
 
 const AppBar = styled(MuiAppBar)<AppBarProps>(({ theme }) => ({

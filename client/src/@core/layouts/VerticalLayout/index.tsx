@@ -62,6 +62,8 @@ const VerticalLayout = (props: LayoutProps) => {
   // ** States
   const [navVisible, setNavVisible] = useState<boolean>(false);
 
+  const [navCollapsed, setNavCollapse] = useState<boolean>(settings.navCollapsed || false);
+
   // ** Hook
   const hidden = useMediaQuery((theme: Theme) => theme.breakpoints.down('lg'));
 
@@ -82,14 +84,15 @@ const VerticalLayout = (props: LayoutProps) => {
           settings={settings}
           // eslint-disable-next-line react/no-children-prop
           children={children}
-          saveSettings={props.saveSettings}
+          navCollapsed={navCollapsed}
+          setNavCollapse={setNavCollapse}
         />
         <MainContentWrapper
           className='layout-content-wrapper'
           sx={{ ...(contentHeightFixed && { maxHeight: '100vh' }) }}
         >
           {/* AppBar Component */}
-          <AppBar toggleNavVisibility={toggleNavVisibility} {...props} />
+          <AppBar toggleNavVisibility={toggleNavVisibility} hidden={hidden} {...props} />
 
           {/* Content */}
           <ContentWrapper

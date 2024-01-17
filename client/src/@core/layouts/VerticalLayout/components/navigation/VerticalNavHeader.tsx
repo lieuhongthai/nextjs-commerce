@@ -19,11 +19,12 @@ import { LayoutProps } from '@/@core/types/mui/type';
 interface Props {
   navHover: boolean;
   collapsedNavWidth: number;
-  hidden: LayoutProps['hidden'];
+  hidden: boolean;
   navigationBorderWidth: number;
   toggleNavVisibility: () => void;
   settings: LayoutProps['settings'];
-  saveSettings: LayoutProps['saveSettings'];
+  navCollapsed: boolean;
+  setNavCollapse: (isBool: boolean) => void;
 }
 
 // ** Styled Components
@@ -50,12 +51,20 @@ const StyledLink = styled(Link)({
 
 const VerticalNavHeader = (props: Props) => {
   // ** Props
-  const { hidden, navHover, settings, saveSettings, collapsedNavWidth, toggleNavVisibility, navigationBorderWidth } =
-    props;
+  const {
+    hidden,
+    navHover,
+    settings,
+    collapsedNavWidth,
+    toggleNavVisibility,
+    navigationBorderWidth,
+    navCollapsed,
+    setNavCollapse,
+  } = props;
 
   // ** Hooks & Vars
   const theme = useTheme();
-  const { mode, direction, navCollapsed } = settings;
+  const { mode, direction } = settings;
   const menuCollapsedStyles = navCollapsed && !navHover ? { opacity: 0 } : { opacity: 1 };
 
   const svgFillSecondary = () => {
@@ -196,7 +205,7 @@ const VerticalNavHeader = (props: Props) => {
         <IconButton
           disableRipple
           disableFocusRipple
-          onClick={() => saveSettings({ ...settings, navCollapsed: !navCollapsed })}
+          onClick={() => setNavCollapse(!navCollapsed)}
           sx={{ p: 0, color: 'text.primary', backgroundColor: 'transparent !important' }}
         >
           <Box

@@ -80,12 +80,11 @@ export type HorizontalLayoutProps = {
 };
 
 export type LayoutProps = {
-  hidden: boolean;
+  // hidden: boolean;
   settings: Settings;
   children: ReactNode;
   footerProps?: FooterProps;
   contentHeightFixed?: boolean;
-  saveSettings: (values: Settings) => void;
 };
 
 export type Settings = {
