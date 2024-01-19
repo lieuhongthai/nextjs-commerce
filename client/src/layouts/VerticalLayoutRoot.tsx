@@ -8,6 +8,8 @@ import VerticalLayout from '@/@core/layouts/VerticalLayout';
 import { initialSettings } from '@/configs/initialSettings';
 
 const VerticalLayoutRoot = ({ children }: { children: ReactNode }) => {
+  console.log(12005, 'VerticalLayoutRoot');
+
   return <VerticalLayout settings={initialSettings}>{children}</VerticalLayout>;
 };
 
