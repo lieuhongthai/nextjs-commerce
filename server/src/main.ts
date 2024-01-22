@@ -10,7 +10,7 @@ import { HttpExceptionFilter } from './filters/httpException.filter';
 import { Log4jsLogger } from '@nestx-log4js/core';
 import * as compression from 'compression';
 import helmet from 'helmet';
-import * as csurf from 'csurf';
+// import * as csurf from 'csurf';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
@@ -41,7 +41,7 @@ async function bootstrap() {
 
   app.enableCors();
 
-  app.use(csurf());
+  // app.use(csurf());
 
   app.useGlobalPipes(new ValidationPipe());
 

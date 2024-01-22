@@ -27,8 +27,15 @@ import { LoggerMiddleware } from './middlewares/logger.middleware';
 import { APP_FILTER, APP_PIPE } from '@nestjs/core';
 import { HttpExceptionFilter } from './filters/httpException.filter';
 
+// ** Database
+import { SequelizeModule } from '@nestjs/sequelize';
+import { UsersModule } from './model/users/users.module';
+import { RolesModule } from './model/roles/roles.module';
+import { PermissionsModule } from './model/permissions/permissions.module';
+
 @Module({
   imports: [
+    // ** NextJs Config
     ConfigModule.forRoot({
       load: [configuration],
       isGlobal: true,
@@ -39,7 +46,35 @@ import { HttpExceptionFilter } from './filters/httpException.filter';
         PORT: Joi.number().default(8080),
       }),
     }),
+
+    // ** Database
+
+    SequelizeModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+
+      useFactory: (configService: ConfigService) => {
+        console.log(12005, process.env.DB_URI, configService.get('database'));
+        const { uri } = configService.get('database');
+
+        return {
+          uri,
+          dialect: 'postgres',
+          // models: [User],
+          logging: false,
+          autoLoadModels: true,
+        };
+      },
+    }),
+
+    // ** Log4js
     Log4jsModule.forRoot({ config: LOG4JS_DEFAULT_CONFIG }),
+
+    UsersModule,
+
+    RolesModule,
+
+    PermissionsModule,
   ],
   controllers: [AppController],
   providers: [
