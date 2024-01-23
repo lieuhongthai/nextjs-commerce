@@ -26,6 +26,7 @@
     "@nestjs/mapped-types": "*",
     "@nestjs/platform-express": "^9.0.0",
     "@nestjs/sequelize": "^10.0.0",
+    "@nestjs/swagger": "^7.2.0",
     "@nestx-log4js/core": "^1.5.1",
     "@types/sequelize": "^4.28.20",
     "class-transformer": "^0.5.1",

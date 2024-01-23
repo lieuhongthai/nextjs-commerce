@@ -6,6 +6,9 @@ import { ConfigService } from '@nestjs/config';
 
 // ** Pipe
 import { ValidationPipe } from '@nestjs/common';
+
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+
 import { HttpExceptionFilter } from './filters/httpException.filter';
 import { Log4jsLogger } from '@nestx-log4js/core';
 import * as compression from 'compression';
@@ -20,7 +23,16 @@ async function bootstrap() {
   const configuration: ConfigService = app.get(ConfigService);
 
   const port = configuration.get('port');
+  const projectTitle = configuration.get('projectTitle');
 
+  const config = new DocumentBuilder()
+    .setTitle(projectTitle)
+    .setDescription('')
+    .setVersion('1.00')
+    .addServer(`http://localhost:${port}/api`)
+    .build();
+
+  SwaggerModule.setup('swagger', app, SwaggerModule.createDocument(app, config));
   app.setGlobalPrefix('api');
 
   app.use(compression());

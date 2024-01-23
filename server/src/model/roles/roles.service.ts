@@ -1,13 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { CreateRoleDto } from './dto/create-role.dto';
 import { UpdateRoleDto } from './dto/update-role.dto';
-import { InjectModel } from '@nestjs/sequelize';
-import { Users } from '../users/user.model';
 
 @Injectable()
 export class RolesService {
-  @InjectModel(Users)
-  private userModel: typeof Users;
+  // @InjectModel(Users)
+  // private userModel: typeof Users;
   create(createRoleDto: CreateRoleDto) {
     return 'This action adds a new role';
   }
