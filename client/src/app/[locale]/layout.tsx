@@ -24,10 +24,6 @@ export default function LocaleLayout({ children, params: { locale } }: RootLayou
     <html lang={locale}>
       <head></head>
       <body>
-        {/* Config of Mui Offical */}
-        {/* <AppRouterCacheProvider>{children}</AppRouterCacheProvider> */}
-
-        {/* Config of Tss-react */}
         <NextAppDirEmotionCacheProvider options={{ key: 'tss-css' }}>
           <AppRouterCacheProvider>
             <ThemeComponent settings={themeComponentConfig}>{children}</ThemeComponent>

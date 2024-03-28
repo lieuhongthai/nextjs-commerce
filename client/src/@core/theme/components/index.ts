@@ -193,10 +193,12 @@ const componentMui = (settings: ThemeSettings): ComponentsMui => {
     // ** Autocomplete
     MuiAutocomplete: {
       styleOverrides: {
+        root: {},
         paper: ({ theme }) => ({
           boxShadow: theme.shadows[6],
           ...(skin === 'bordered' && { boxShadow: 'none', border: `1px solid ${theme.palette.divider}` }),
         }),
+        tagSizeSmall: {},
       },
     },
 

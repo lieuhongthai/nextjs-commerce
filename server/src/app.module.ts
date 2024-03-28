@@ -27,8 +27,18 @@ import { LoggerMiddleware } from './middlewares/logger.middleware';
 import { APP_FILTER, APP_PIPE } from '@nestjs/core';
 import { HttpExceptionFilter } from './filters/httpException.filter';
 
+// ** Database
+import { SequelizeModule } from '@nestjs/sequelize';
+import { UsersModule } from './model/users/users.module';
+import { RolesModule } from './model/roles/roles.module';
+import { PermissionsModule } from './model/permissions/permissions.module';
+
+// ** Modules
+import { SlackChannelModule } from './slack-channel/slack-channel.module';
+
 @Module({
   imports: [
+    // ** NextJs Config
     ConfigModule.forRoot({
       load: [configuration],
       isGlobal: true,
@@ -39,7 +49,30 @@ import { HttpExceptionFilter } from './filters/httpException.filter';
         PORT: Joi.number().default(8080),
       }),
     }),
+
+    // ** Database
+    SequelizeModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+
+      useFactory: (configService: ConfigService) => {
+        const { uri, dialect, logging } = configService.get('database');
+        console.log(12005, uri);
+
+        return { uri, dialect, logging, autoLoadModels: true };
+      },
+    }),
+
+    // ** Log4js
     Log4jsModule.forRoot({ config: LOG4JS_DEFAULT_CONFIG }),
+
+    UsersModule,
+
+    RolesModule,
+
+    PermissionsModule,
+
+    SlackChannelModule,
   ],
   controllers: [AppController],
   providers: [
