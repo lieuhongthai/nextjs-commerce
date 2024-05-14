@@ -55,6 +55,8 @@ async function bootstrap() {
 
   // app.use(csurf());
 
+  app.useLogger(app.get(Log4jsLogger));
+
   app.useGlobalPipes(new ValidationPipe());
 
   app.useGlobalFilters(new HttpExceptionFilter(app.get(Log4jsLogger)));

@@ -35,6 +35,7 @@ import { PermissionsModule } from './model/permissions/permissions.module';
 
 // ** Modules
 import { SlackChannelModule } from './slack-channel/slack-channel.module';
+import { StartUpService } from './startUp.service';
 
 @Module({
   imports: [
@@ -77,6 +78,7 @@ import { SlackChannelModule } from './slack-channel/slack-channel.module';
   controllers: [AppController],
   providers: [
     AppService,
+    StartUpService,
     {
       provide: APP_FILTER,
       useClass: HttpExceptionFilter,
