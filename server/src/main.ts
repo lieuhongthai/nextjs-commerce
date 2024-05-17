@@ -59,7 +59,7 @@ async function bootstrap() {
 
   app.useGlobalPipes(new ValidationPipe());
 
-  app.useGlobalFilters(new HttpExceptionFilter(app.get(Log4jsLogger)));
+  app.useGlobalFilters(new HttpExceptionFilter(app.get(Log4jsLogger), app.get(ConfigService)));
 
   await app.listen(port);
 

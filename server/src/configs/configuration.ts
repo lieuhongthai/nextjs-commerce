@@ -23,3 +23,16 @@ export default () => ({
   secretKeyJwt: process.env.SECRET_KEY_JWT || 'SECRET_KEY_JWT',
   expiresInJwt: process.env.EXPIRES_IN_JWT || 'EXPIRES_IN_JWT',
 });
+
+export type TConfigService = {
+  projectTitle: string;
+
+  port: number;
+  nodeEnv: string | 'production' | 'developer';
+  slackApi: { token: string };
+  database: { uri: string; dialect: string; logging: boolean };
+  redisHost: string;
+  redisPort: number;
+  secretKeyJwt: string;
+  expiresInJwt: string;
+};
