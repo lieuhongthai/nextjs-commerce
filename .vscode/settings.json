@@ -5,6 +5,7 @@
     "formatjs",
     "iconify",
     "localematcher",
+    "metatype",
     "nestx"
   ]
 }
