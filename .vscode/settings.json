@@ -2,10 +2,12 @@
   "cSpell.words": [
     "apollographql",
     "appenders",
+    "cssnano",
     "formatjs",
     "iconify",
     "localematcher",
     "metatype",
-    "nestx"
+    "nestx",
+    "tailwindcss"
   ]
 }
