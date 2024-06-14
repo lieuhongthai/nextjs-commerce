@@ -1,3 +1,5 @@
+import Image from "next/image";
+import Logo from "../../../public/logo-3.svg";
 import NavBar from "@/@core/components/nav";
 
 export default function Home() {
@@ -9,7 +11,7 @@ export default function Home() {
         <div
           tabIndex={0}
           role="button"
-          className="btn m-1"
+          className="m-1 btn"
           id="dropdownMenuButton"
           data-bs-toggle="dropdown"
         >
@@ -31,6 +33,20 @@ export default function Home() {
           </li>
         </ul>
       </div>
+
+      <>
+        <div className="relative flex items-center w-24 h-24 overflow-hidden bg-white rounded-full">
+          <Image
+            src={Logo}
+            alt="Logo"
+            className="absolute object-cover w-full transform rounded-full"
+            width={24}
+            height={24}
+          />
+        </div>
+
+        <Image src={Logo} alt="Logo" className="mask mask-circle" width={12} />
+      </>
     </div>
   );
 }

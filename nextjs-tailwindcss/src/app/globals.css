@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.drawer-toggle:checked~.drawer-side .btn-arrow-drawer {
+	transform: rotate(180deg);
+	transition: transform .25s ease-in-out .35s;
+}
