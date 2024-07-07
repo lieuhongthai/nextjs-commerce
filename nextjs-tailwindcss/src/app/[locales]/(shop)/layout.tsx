@@ -1,18 +1,14 @@
 import { ReactNode } from "react";
-import Header from "@/@core/components/header";
-import Drawer from "@/@core/components/drawer";
+import NavBar from "@/@core/components/nav";
 
 type RootLayoutTypes = { children: ReactNode };
 
 const Layout = ({ children }: RootLayoutTypes) => {
   return (
-    <div>
-      <Header />
-
-      <div style={{ height: "100vh" }}></div>
-
-      {children}
-    </div>
+    <>
+      <NavBar />
+      <div>{children}</div>
+    </>
   );
 };
 

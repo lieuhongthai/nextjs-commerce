@@ -21,8 +21,8 @@ export default function LocaleLayout({
   params: { locale },
 }: RootLayoutTypes) {
   return (
-    <html lang={locale}>
-      <body className={inter.className}>
+    <html lang={locale} suppressHydrationWarning={true}>
+      <body>
         <main>{children}</main>
       </body>
     </html>

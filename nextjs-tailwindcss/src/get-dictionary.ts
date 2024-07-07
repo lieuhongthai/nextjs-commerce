@@ -1,5 +1,5 @@
 import "server-only";
-import type { Locale } from "./i18.config";
+import type { TLocale } from "./i18.config";
 
 // We enumerate all dictionaries here for better linting and typescript support
 // We also get the default import for cleaner types
@@ -9,5 +9,5 @@ const dictionaries = {
 };
 
 export type DictionariesType = typeof dictionaries;
-export const getDictionary = async (locale: Locale) =>
+export const getDictionary = async (locale: TLocale) =>
   dictionaries[locale]?.() ?? dictionaries.en();
