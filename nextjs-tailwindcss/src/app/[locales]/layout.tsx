@@ -5,6 +5,8 @@ import { TLayoutTypes } from "@/@core/types/layout.type";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
+import { cookies } from "next/headers";
+
 import "../globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -20,8 +22,18 @@ export default function LocaleLayout({
   children,
   params: { locale },
 }: RootLayoutTypes) {
+  // ** Cookie
+  const cookieStore = cookies();
+
+  // ** Theme
+  const theme = cookieStore.get("theme");
+
   return (
-    <html lang={locale} suppressHydrationWarning={true}>
+    <html
+      lang={locale}
+      suppressHydrationWarning={true}
+      data-theme={theme?.value || "light"}
+    >
       <body>
         <main>{children}</main>
       </body>

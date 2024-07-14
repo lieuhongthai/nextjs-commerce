@@ -3,13 +3,34 @@ import Link from "next/link";
 import Logo from "../../../../public/MeGaT.svg";
 import { TNavLink } from "@/@core/types/menu.type";
 import themeSetting from "@/@core/settings/themeSetting";
+import React from "react";
+import RadioTheme from "./RadioTheme";
 
 interface IProps {
   open?: boolean;
-
   navItems?: TNavLink[];
 }
-const NavBar = ({ open, navItems }: IProps) => {
+
+const MenuRender = ({ navItems }: IProps) => (
+  <>
+    {navItems &&
+      navItems.map((v) => (
+        <li key={v.title}>
+          <a
+            className="transition duration-300 hover:text-gray-400"
+            href={v.path}
+          >
+            {v.title}
+          </a>
+        </li>
+      ))}
+  </>
+);
+
+const NavBar = (props: IProps) => {
+  // ** Props
+  const { open, navItems } = props;
+
   const LogoRender = () => {
     return (
       <div className="flex items-center">
@@ -46,39 +67,6 @@ const NavBar = ({ open, navItems }: IProps) => {
     );
   };
 
-  const RadioTheme = ({
-    label,
-    value,
-    defaultChecked,
-  }: {
-    label: string;
-    value: string;
-    defaultChecked?: boolean;
-  }) => (
-    <li>
-      <label className="flex justify-between">
-        <span className="label-text">{label}</span>
-        <input
-          type="radio"
-          name="theme-radios"
-          className="radio-sm theme-controller"
-          defaultChecked={defaultChecked}
-          value={value}
-        />
-        {/* <label htmlFor="">
-          <div>aaaaaaaaaaaaaaaaaa</div>
-        </label> */}
-        {/* <span className="label-text">{label}</span>
-        <input
-          type="radio"
-          name="theme-radios"
-          className="radio theme-controller"
-          defaultChecked={defaultChecked}
-          value={value}
-        /> */}
-      </label>
-    </li>
-  );
   const NavRender = () => {
     return (
       <div className=">lg:container >lg:mx-auto flex navbar ">
@@ -118,17 +106,7 @@ const NavBar = ({ open, navItems }: IProps) => {
 
           {/* Nav menu */}
           <ul className="hidden space-x-4 md:inline-flex menu menu-horizontal dropdown-content">
-            {navItems &&
-              navItems.map((v) => (
-                <li key={v.title}>
-                  <a
-                    className="transition duration-300 hover:text-gray-400"
-                    href={v.path}
-                  >
-                    {v.title}
-                  </a>
-                </li>
-              ))}
+            <MenuRender {...props} />
             <li>
               <Link href={"#"}>Home</Link>
             </li>
@@ -222,17 +200,7 @@ const NavBar = ({ open, navItems }: IProps) => {
                 </svg>
               </label>
             </div>
-            {navItems &&
-              navItems.map((v) => (
-                <li key={v.title}>
-                  <a
-                    className="transition duration-300 hover:text-gray-400"
-                    href={v.path}
-                  >
-                    {v.title}
-                  </a>
-                </li>
-              ))}
+            <MenuRender {...props} />
             <li>
               <a>Sidebar Item 1</a>
             </li>

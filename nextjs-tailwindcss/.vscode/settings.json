@@ -1,10 +1,15 @@
 {
   "cSpell.words": [
     "daisyui",
+    "embla",
     "lofi",
     "nord",
     "synthwave",
     "tailwindcss",
     "wireframe"
-  ]
+  ],
+
+  "files.associations": {
+    "*.css": "tailwindcss"
+  }
 }

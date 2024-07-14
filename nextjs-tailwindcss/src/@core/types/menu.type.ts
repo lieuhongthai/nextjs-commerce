@@ -12,3 +12,9 @@ export type TNavGroup = {
 
   children?: (TNavGroup | TNavLink)[];
 };
+
+export type TRadioTheme = {
+  label: string;
+  value: string;
+  defaultChecked?: boolean;
+};
