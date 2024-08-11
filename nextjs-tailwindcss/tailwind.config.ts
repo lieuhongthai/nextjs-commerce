@@ -1,3 +1,4 @@
+/** @type {import('tailwindcss').Config} */
 import type { Config } from "tailwindcss";
 
 import defaultTheme from "tailwindcss/defaultTheme";
@@ -18,6 +19,7 @@ const config: Config = {
   theme: {
     screens: {
       ">lg": { min: "2080px" },
+      "sm<": { max: "425px" },
       ...defaultTheme.screens,
     },
     extend: {
@@ -73,6 +75,6 @@ const config: Config = {
     logs: true, // Shows info about daisyUI version and used config in the console when building your CSS
     themeRoot: ":root", // The element that receives theme color CSS variables
   },
-  plugins: [require("daisyui")],
+  plugins: [require("@tailwindcss/typography"), require("daisyui")],
 };
 export default config;

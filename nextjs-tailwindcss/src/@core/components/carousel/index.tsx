@@ -9,15 +9,10 @@ interface IProps {
   options?: EmblaOptionsType;
 }
 
-// export function imageLoader({ width, height, src }: any) {
-//   return `https://picsum.photos/${width}/350?v=${src}`;
-// }
 const Carousel = (props: IProps) => {
-  // ** Props
   const { slides, options } = props;
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
 
-  // ** State
   const [selectedIndex, setSelectedIndex] = useState(0);
 
   const onDotButtonClick = useCallback(
@@ -29,48 +24,50 @@ const Carousel = (props: IProps) => {
     [emblaApi]
   );
 
-  const onSelect = useCallback((embleApi: EmblaCarouselType) => {
-    setSelectedIndex(embleApi.selectedScrollSnap());
+  const onSelect = useCallback((emblaApi: EmblaCarouselType) => {
+    setSelectedIndex(emblaApi.selectedScrollSnap());
   }, []);
-
-  // ** Effect
 
   useEffect(() => {
     if (emblaApi) {
-      console.log(emblaApi.slideNodes()); // Access API
       emblaApi.on("select", onSelect);
+      return () => {
+        emblaApi.off("select", onSelect);
+      };
     }
   }, [emblaApi, onSelect]);
 
   return (
-    <div className="embla relative">
+    <div className="embla relative ">
       <div className="embla__viewport" ref={emblaRef}>
-        <div className="embla__container md:h-[32rem]">
+        <div className="embla__container h-[25rem] md:h-[32rem]">
           {slides.map((index) => (
-            <div className="embla__slide" key={`embla-key-index-${index}`}>
+            <div
+              className="embla__slide"
+              key={`embla-key-index-${index}`}
+              style={{ background: "transparent" }}
+            >
               <Image
                 className="embla__slide__img"
-                loader={() => `https://picsum.photos/1912/512?v=${index}`}
+                loader={({ width }) =>
+                  `https://picsum.photos/${width}/300?v=${index}`
+                }
                 src={`${index}.png`}
                 alt="Your alt text"
-                fill
-                style={{ objectFit: "cover" }}
+                width={800}
+                height={300}
               />
             </div>
           ))}
         </div>
       </div>
 
-      {/* controller */}
-
-      {/* {console.log(12005, emblaApi?.scrollSnapList())} */}
-
       <div className="embla__controls absolute bottom-1 left-1/2 -translate-x-1/2 -translate-y-1/2">
         <div className="embla__dots">
           {emblaApi &&
             emblaApi
               .scrollSnapList()
-              .map((v, index) => (
+              .map((_, index) => (
                 <DotButton
                   key={`embla__dot-${index}`}
                   onClick={() => onDotButtonClick(index)}
@@ -86,9 +83,13 @@ const Carousel = (props: IProps) => {
 };
 
 export default Carousel;
-export const useDotButton = (emblaApi: any, onButtonClick: any) => {
+
+export const useDotButton = (
+  emblaApi: EmblaCarouselType,
+  onButtonClick: (emblaApi: EmblaCarouselType) => void
+) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [scrollSnaps, setScrollSnaps] = useState([]);
+  const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
 
   const onDotButtonClick = useCallback(
     (index: number) => {
@@ -99,11 +100,11 @@ export const useDotButton = (emblaApi: any, onButtonClick: any) => {
     [emblaApi, onButtonClick]
   );
 
-  const onInit = useCallback((emblaApi: any) => {
+  const onInit = useCallback((emblaApi: EmblaCarouselType) => {
     setScrollSnaps(emblaApi.scrollSnapList());
   }, []);
 
-  const onSelect = useCallback((emblaApi: any) => {
+  const onSelect = useCallback((emblaApi: EmblaCarouselType) => {
     setSelectedIndex(emblaApi.selectedScrollSnap());
   }, []);
 
@@ -114,6 +115,12 @@ export const useDotButton = (emblaApi: any, onButtonClick: any) => {
     onSelect(emblaApi);
 
     emblaApi.on("reInit", onInit).on("reInit", onSelect).on("select", onSelect);
+    return () => {
+      emblaApi
+        .off("reInit", onInit)
+        .off("reInit", onSelect)
+        .off("select", onSelect);
+    };
   }, [emblaApi, onInit, onSelect]);
 
   return {

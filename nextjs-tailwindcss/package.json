@@ -10,7 +10,9 @@
   },
   "dependencies": {
     "@formatjs/intl-localematcher": "^0.5.4",
+    "@tailwindcss/typography": "^0.5.14",
     "cssnano": "^7.0.4",
+    "dayjs": "^1.11.12",
     "embla-carousel": "^8.1.6",
     "embla-carousel-react": "^8.1.6",
     "negotiator": "^0.6.3",
