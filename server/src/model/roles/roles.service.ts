@@ -1,13 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import { CreateRoleDto } from './dto/create-role.dto';
-import { UpdateRoleDto } from './dto/update-role.dto';
+import ModelService from '../common/model.service';
+import { Roles } from './roles.model';
+import { InjectModel } from '@nestjs/sequelize';
 
 @Injectable()
-export class RolesService {
-  // @InjectModel(Users)
-  // private userModel: typeof Users;
-  create(createRoleDto: CreateRoleDto) {
-    return 'This action adds a new role';
+export class RolesService extends ModelService<Roles> {
+  constructor(@InjectModel(Roles) rolesModel: typeof Roles) {
+    super(rolesModel);
   }
 
   findAll() {
@@ -16,10 +15,6 @@ export class RolesService {
 
   findOne(id: number) {
     return `This action returns a #${id} role`;
-  }
-
-  update(id: number, updateRoleDto: UpdateRoleDto) {
-    return `This action updates a #${id} role`;
   }
 
   remove(id: number) {
